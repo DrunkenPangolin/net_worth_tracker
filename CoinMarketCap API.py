@@ -5,12 +5,12 @@ import json
 from personal_data import CoinMarketCap_API
 
 
-
-url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/map'
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 parameters = {
-  'start':'1',
-  'limit':'5000',
-  'convert':'USD'
+'start': '3',
+'limit': '1',
+'convert': 'GBP',
+
 }
 headers = {
   'Accepts': 'application/json',
@@ -23,6 +23,6 @@ session.headers.update(headers)
 try:
   response = session.get(url, params=parameters)
   data = json.loads(response.text)
-  print(data)
+  print(data['data'][0]['symbol'])
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
