@@ -43,8 +43,8 @@ Calculations
 
 Separate Functions
 - Scrapers
-  - Crypto values (CoinMarketCap)
-  - Fund values (Morningstar)
+  - Crypto values (CoinMarketCap, now using API - need to pull specific values from data)
+  - Fund values (Morningstar?)
   - Stock values (Google? Yahoo?)
   - Accounts and Expenses (MoneyDashboard)
   - Currencies (Google? XE?)
