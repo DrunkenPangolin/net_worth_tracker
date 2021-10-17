@@ -7,7 +7,7 @@ from personal_data import CoinMarketCap_API
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 parameters = {
-'start': '3',
+'start': '1',
 'limit': '1',
 'convert': 'GBP',
 
