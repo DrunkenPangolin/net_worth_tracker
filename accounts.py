@@ -4,7 +4,7 @@ f = open('./account_list.csv','r')
 accounts = f.readlines()
 f.close()
 
-df = pd.read_csv('./account_list.csv')
+df = pd.read_csv('./account_list (copy).csv')
 
 print(df)
 

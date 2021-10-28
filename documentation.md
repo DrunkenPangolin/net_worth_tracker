@@ -1,5 +1,7 @@
 #Documentation
 
+https://streamlit.io?
+
 Implemented
 - No code written... yet!
 
@@ -47,7 +49,8 @@ Separate Functions
   - Fund values (Morningstar?)
   - Stock values (Google? Yahoo?)
   - Accounts and Expenses (MoneyDashboard)
-  - Currencies (Google? XE?)
+  - Currencies (https://pypi.org/project/forex-python/)
+- Email 1 month/week before card benefits expire
 - 
 
 Data
