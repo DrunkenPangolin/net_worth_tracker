@@ -130,7 +130,6 @@ def reformat():
             df["date"] = pd.to_datetime(df.date, dayfirst=True)             # converting to date object, reading dd/mm/yyyy
             df = df.sort_values(['date','time']).reset_index()              # order by date, new index
             df = df.reindex(columns = new_columns)                          # adds & removes columns to create uniform output
-         
             df.to_csv(account_name + ".csv")                                # write to file
     os.chdir('..')
     os.chdir('..')
