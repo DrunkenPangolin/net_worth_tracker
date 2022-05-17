@@ -41,6 +41,7 @@ def premium_bonds(df: pd.DataFrame):
         df["amount"],
         df["amount"] * (-1),
     )
+    df = df.sort_index(ascending=False).reset_index()
     return df
 
 
@@ -127,6 +128,7 @@ def reformat():
             df = df.reindex(columns = new_columns)                          # adds & removes columns to create uniform output
          
             df.to_csv(account_name + ".csv")                                # write to file
+    os.chdir('..')
 
 
 if __name__ == "__main__":
