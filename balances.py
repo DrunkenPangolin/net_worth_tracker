@@ -13,7 +13,7 @@ def currency_panda(row):
 def balances():
     # change directory and open file
     os.chdir('./csv_data/cash')
-    df = pd.read_csv('Starling.csv')
+    df = pd.read_csv('Starling.csv',)
 
     # drop duplicate dates, keeping last balance, dropping unnecessary columns
     df = df.drop_duplicates(subset=["date"], keep="last").reset_index()
@@ -21,6 +21,8 @@ def balances():
 
     df["starling"] = df.apply(currency_panda, axis=1)
     df = df.drop(columns = ['currency','balance'])
+
+    df.set_index('date', inplace=True)
 
     df.to_csv('starling_balance.csv')
 
