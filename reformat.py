@@ -35,6 +35,8 @@ def premium_bonds(df: pd.DataFrame):
         "action"
     ]
     df["category"] = "internal"
+    df["currency"] = "GBP"
+
     change_cat(df, "interest", "description", "prize")
     df["amount"] = np.where(
         df["description"].str.contains("deposit|prize"),
@@ -56,6 +58,8 @@ def starling(df: pd.DataFrame):
         "category",
         "notes",
     ]
+    df["currency"] = "GBP"
+
 
     # changing categories
     change_cat(df, "investments", "name",
@@ -116,6 +120,7 @@ def reformat():
                 "description",
                 "type",
                 "amount",
+                "currency",
                 "balance",
                 "category",
             ]
@@ -129,7 +134,7 @@ def reformat():
             df.to_csv(account_name + ".csv")                                # write to file
     os.chdir('..')
     os.chdir('..')
-    
+
 
 if __name__ == "__main__":
     reformat()
