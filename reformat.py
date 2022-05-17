@@ -89,13 +89,12 @@ def starling(df: pd.DataFrame):
 
 def reformat():
     # get name of folder in account directory, and access it
-    os.chdir(os.path.join(".", "csv_data"))
-    directory = os.path.join(".", 'cash')
-    for account_name in os.listdir(directory):
+    os.chdir(os.path.join(".", "csv_data",'cash'))
+    for account_name in os.listdir('.'):
         if ".csv" not in account_name:
             print(account_name)
 
-            filepath = os.path.join(directory, account_name)
+            filepath = os.path.join('.', account_name)
             file_list = os.listdir(filepath)
 
             # account specific reformat to csv (if required)
@@ -129,7 +128,8 @@ def reformat():
          
             df.to_csv(account_name + ".csv")                                # write to file
     os.chdir('..')
-
+    os.chdir('..')
+    
 
 if __name__ == "__main__":
     reformat()
