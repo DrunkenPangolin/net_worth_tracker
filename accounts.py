@@ -1,13 +1,10 @@
 import numpy as np
 import pandas as pd
 
-f = open('./account_list.csv','r')
-accounts = f.readlines()
-f.close()
-
-df = pd.read_csv('./account_list (copy).csv')
-
-print(df)
+def accounts():
+    df = pd.read_csv('./account_list.csv')
+    df['account_name'] = df['account_name'].str.lower().str.replace(' ','_') 
+    print(df)
 
 # cumulative sum (for balances) in pandas dataframe
 # df['Balance'] = np.where(df['Status'].eq('Deposit'),df['Amount'], df['Amount'] * -1)
@@ -18,6 +15,17 @@ print(df)
 def change_cat(df: pd.DataFrame, new_category: str, column: str, criteria: str) -> pd.DataFrame:
     df["category"] = np.where(df[column].str.contains(criteria), new_category, df["category"])
 
+
+def chase(df: pd.DataFrame):
+    df.columns = [
+        "date",
+        "description",
+        "amount",
+        "balance",
+        "action"
+    ]
+
+    return df
 
 def paypal(df: pd.DataFrame):
     df.columns = [
@@ -102,3 +110,5 @@ def starling(df: pd.DataFrame):
     change_cat(df, "interest", "description", "nterest")
     return df
 
+if __name__ == '__main__':
+    accounts()
