@@ -9,6 +9,11 @@ df = pd.read_csv('./account_list (copy).csv')
 
 print(df)
 
+# cumulative sum (for balances) in pandas dataframe
+# df['Balance'] = np.where(df['Status'].eq('Deposit'),df['Amount'], df['Amount'] * -1)
+# df['Balance'] = df['Balance'].cumsum()
+
+
 
 def change_cat(df: pd.DataFrame, new_category: str, column: str, criteria: str) -> pd.DataFrame:
     df["category"] = np.where(df[column].str.contains(criteria), new_category, df["category"])
