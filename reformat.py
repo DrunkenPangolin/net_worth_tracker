@@ -6,6 +6,18 @@ from accounts import *
 APP_NAME = "csv_reformatter"
 
 def reformat():
+    new_columns = [
+        "date",
+        "time",
+        "name",
+        "description",
+        "type",
+        "amount",
+        "currency",
+        "balance",
+        "category",
+    ]
+
     # get name of folder in account directory, and access it
     os.chdir(os.path.join(".", "csv_data",'cash'))
     for account_name in os.listdir('.'):
@@ -26,18 +38,6 @@ def reformat():
 
             # dropping columns according to account based function
             df = globals()[account_name.lower().replace(" ", "_")](df)      # to be imported from accounts.py
-
-            new_columns = [
-                "date",
-                "time",
-                "name",
-                "description",
-                "type",
-                "amount",
-                "currency",
-                "balance",
-                "category",
-            ]
 
             if 'time' not in list(df.columns):
                 df['time'] = df.index
