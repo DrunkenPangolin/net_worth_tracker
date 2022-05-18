@@ -9,7 +9,7 @@ import personal_data
 
 def currency_panda(row):
     (y,m,d) = map(int,row['date'].split('-'))
-    return round(c.convert(row['balance'],row['currency'], personal_data.currency, date(y,m,d),2)
+    return round(c.convert(row['balance'],row['currency'], personal_data.currency, date(y,m,d)),2)
 
 def balances():
     # change directory and open file
