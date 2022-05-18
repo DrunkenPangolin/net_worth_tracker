@@ -6,7 +6,7 @@ def accounts():
     df = pd.read_csv('./account_list.csv')
     df.set_index('account_name', inplace=True)
     #df['account_name'] = df['account_name'].str.lower().str.replace(' ','_')
-    print(df)
+    #print(df)
     return df
 
 # cumulative sum (for balances) in pandas dataframe

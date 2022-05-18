@@ -46,14 +46,14 @@ def reformat():
             if 'time' not in list(df.columns):
                 df['time'] = df.index
             df["date"] = pd.to_datetime(df.date, dayfirst=True)             # converting to date object, reading dd/mm/yyyy
-            df['currency'] = np.where(df['currency'] == np.nan, accounts().loc[account_name,'currency'], df['currency'])
             df = df.sort_values(['date','time']).reset_index()              # order by date, new index
             df = df.reindex(columns = new_columns)                          # adds & removes columns to create uniform output
             df.set_index('date', inplace=True)
+            df['currency'] = np.where(df['currency'].isna(), accounts().loc[account_name,'currency'], df['currency'])
+
             print(df)
             df.to_csv(os.path.join(dir,account_name + ".csv"))              # write to file
  
-
 
 if __name__ == "__main__":
     reformat()
