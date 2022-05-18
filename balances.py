@@ -4,11 +4,12 @@ import os
 from currency_converter import CurrencyConverter
 c = CurrencyConverter(fallback_on_missing_rate=True)
 from datetime import date
+import personal_data
 
-desired_currency = 'GBP'
 
 def currency_panda(row):
-    return round(c.convert(row['balance'],row['currency'],desired_currency, date(int('2019-05-01'.split('-')[0]),int('2019-05-01'.split('-')[1]),int('2019-05-01'.split('-')[2]))),2)
+    (y,m,d) = map(int,row['date'].split('-'))
+    return round(c.convert(row['balance'],row['currency'], personal_data.currency, date(y,m,d),2)
 
 def balances():
     # change directory and open file
