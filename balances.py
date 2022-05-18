@@ -7,7 +7,8 @@ from currency_converter import CurrencyConverter
 c = CurrencyConverter(fallback_on_missing_rate=True)
 
 
-def currency_panda(row):
+def currency_panda(row: pd.DataFrame) -> pd.DataFrame:
+    """function converts pandas rows/columns to desired currency"""
     (y, m, d) = map(int, row["date"].split("-"))
     return round(
         c.convert(
@@ -18,6 +19,7 @@ def currency_panda(row):
 
 
 def balances():
+    """strips csv file to only date and end of day balance"""
     # change directory and open file
     dir = os.path.join("csv_data", "cash")
     for x in os.listdir(dir):
@@ -44,6 +46,9 @@ def balances():
 
             df.to_csv(os.path.join("csv_data", "balances", x + "_balance.csv"))
 
+
+def unify():
+    #unify all balance sheet in folder
 
 if __name__ == "__main__":
     balances()

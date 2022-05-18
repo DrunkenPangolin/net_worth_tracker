@@ -6,6 +6,7 @@ from accounts import *
 APP_NAME = "csv_reformatter"
 
 def reformat():
+    """designed to reformat csv files so that all are uniform"""
     new_columns = [
         "date",
         "time",
