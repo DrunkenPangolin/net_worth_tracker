@@ -1,11 +1,9 @@
 import datetime
 import pandas as pd
  
-todays_date = datetime.datetime.now().date()
-index = pd.date_range(todays_date, periods=5, freq='D')
- 
-columns = []
- 
-df = pd.DataFrame(index=index, columns=columns)
- 
+df = pd.read_csv('account_list.csv')
+print(df)
+df.set_index('account_name', inplace=True)
+
+df = df.loc['Starling','currency']
 print(df)
