@@ -13,7 +13,9 @@ def init():
         return
     f = open(f, "r")
 
-    os.makedirs("csv_data", exist_ok=True)
+    folders = ['csv_data', 'balances', 'expenses']
+    for x in folders:
+        os.makedirs(x, exist_ok=True)
     os.chdir("csv_data")
 
     accounts = []
