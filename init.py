@@ -22,7 +22,8 @@ def init():
     for i in f.readlines()[1:]:
         accounts.append(i.split(","))
     for j in accounts:
-        os.makedirs(os.path.join(j[1], j[0]), exist_ok=True)
+        if j[0] != "":
+            os.makedirs(os.path.join(j[1], j[0]), exist_ok=True)
 
 
 if __name__ == "__main__":

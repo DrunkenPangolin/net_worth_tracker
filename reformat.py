@@ -7,7 +7,8 @@ APP_NAME = "csv_reformatter"
 
 def reformat():
     """designed to reformat csv files so that all are uniform"""
-    new_columns = [
+    
+    desired_columns = [
         "date",
         "time",
         "name",
@@ -25,14 +26,19 @@ def reformat():
         if os.path.isdir(os.path.join(dir, account_name)):
             print(account_name)
 
-            filepath = os.path.join(dir, account_name)
-            file_list = os.listdir(filepath)
+            path = os.path.join(dir, account_name)
+            file_list = os.listdir(path)
 
             # account specific reformat to csv (if required)
-
+            try:
+                globals()[account_name.lower().replace(" ", "_")]      # to be imported from accounts.py
+            except Exception as e:
+                print(str(e) + " function not found")
+                continue
+            
             # merging csv files
             try:
-                df = pd.concat(map(pd.read_csv,(os.path.join(filepath, file) for file in file_list)))
+                df = pd.concat(map(pd.read_csv,(os.path.join(path, x) for x in file_list)))
             except Exception as e:
                 print(e)
                 continue
@@ -48,7 +54,7 @@ def reformat():
                 df['time'] = df.index
             df["date"] = pd.to_datetime(df.date, dayfirst=True)             # converting to date object, reading dd/mm/yyyy
             df = df.sort_values(['date','time'])                            # order by date
-            df = df.reindex(columns = new_columns)                          # adds & removes columns to create uniform output
+            df = df.reindex(columns = desired_columns)                          # adds & removes columns to create uniform output
             df = df.drop_duplicates()
             df.set_index('date', inplace=True)
             df['currency'] = np.where(df['currency'].isna(), accounts().loc[account_name,'currency'], df['currency'])

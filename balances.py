@@ -44,11 +44,17 @@ def balances():
 
             df.set_index("date", inplace=True)
 
-            df.to_csv(os.path.join("csv_data", "balances", x + "_balance.csv"))
+            df.to_csv(os.path.join("balances", x + "_balance.csv"))
 
 
 def unify():
-    #unify all balance sheet in folder
+    """unify all balance sheet in folder"""
+    dir = "balances"
+    df = pd.concat(map(pd.read_csv,(os.path.join(dir, file) for file in os.listdir(dir))))
+    df = df.sort_values(['date'])
+    df.to_csv(os.path.join(dir,'total.csv'))
+
 
 if __name__ == "__main__":
     balances()
+    unify()
