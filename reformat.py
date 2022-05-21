@@ -21,7 +21,7 @@ def reformat():
     ]
 
     # get name of folder in account directory, and access it
-    dir = os.path.join(".", "csv_data",'cash')
+    dir = "csv_data"
     for account_name in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, account_name)):
             print(account_name)
@@ -35,7 +35,7 @@ def reformat():
             except Exception as e:
                 print(str(e) + " function not found")
                 continue
-            
+
             # merging csv files
             try:
                 df = pd.concat(map(pd.read_csv,(os.path.join(path, x) for x in file_list)))
@@ -54,7 +54,7 @@ def reformat():
                 df['time'] = df.index
             df["date"] = pd.to_datetime(df.date, dayfirst=True)             # converting to date object, reading dd/mm/yyyy
             df = df.sort_values(['date','time'])                            # order by date
-            df = df.reindex(columns = desired_columns)                          # adds & removes columns to create uniform output
+            df = df.reindex(columns = desired_columns)                      # adds & removes columns to create uniform output
             df = df.drop_duplicates()
             df.set_index('date', inplace=True)
             df['currency'] = np.where(df['currency'].isna(), accounts().loc[account_name,'currency'], df['currency'])

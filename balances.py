@@ -22,13 +22,13 @@ def currency_panda(row: pd.DataFrame) -> pd.DataFrame:
 def balances():
     """strips csv file to only date and end of day balance"""
     # change directory and open file
-    dir = os.path.join("csv_data", "cash")
+    dir = "csv_data"
     for x in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, x)):
 
             try:
                 df = pd.read_csv(os.path.join(dir, x + ".csv"))
-                print( x + ".csv imported successfully")
+                print(x + ".csv imported successfully")
             except FileNotFoundError:
                 print(x + ".csv does not exist")
                 continue
@@ -53,18 +53,18 @@ def unify():
     bal_df = []
 
     for x in os.listdir(dir):
-        bal_df.append(pd.read_csv(os.path.join(dir,x)))
+        bal_df.append(pd.read_csv(os.path.join(dir, x)))
 
     for df in bal_df:
-        df.set_index(['date'], inplace=True)
+        df.set_index(["date"], inplace=True)
 
-    df = pd.concat(bal_df, join='outer', axis=1)
+    df = pd.concat(bal_df, join="outer", axis=1)
     df.index = pd.DatetimeIndex(df.index)
-    df = df.reindex(pd.date_range(df.index.min(),df.index.max()))
-    df = df.fillna( method='ffill')
-    df = df.reindex(pd.date_range(personal_data.start_date,df.index.max()))
+    df = df.reindex(pd.date_range(df.index.min(), df.index.max()))
+    df = df.fillna(method="ffill")
+    df = df.reindex(pd.date_range(personal_data.start_date, df.index.max()))
 
-    df.to_csv('total.csv')
+    df.to_csv("total.csv")
 
 
 if __name__ == "__main__":
