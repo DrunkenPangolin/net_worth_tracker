@@ -1,3 +1,4 @@
+from cmath import nan
 import os
 import pandas as pd
 import personal_data
@@ -23,11 +24,11 @@ def balances():
     # change directory and open file
     dir = os.path.join("csv_data", "cash")
     for x in os.listdir(dir):
-        print(x)
         if os.path.isdir(os.path.join(dir, x)):
 
             try:
                 df = pd.read_csv(os.path.join(dir, x + ".csv"))
+                print( x + ".csv imported successfully")
             except FileNotFoundError:
                 print(x + ".csv does not exist")
                 continue
@@ -41,7 +42,6 @@ def balances():
 
             df[x] = df.apply(currency_panda, axis=1)
             df = df.drop(columns=["currency", "balance"])
-
             df.set_index("date", inplace=True)
 
             df.to_csv(os.path.join("balances", x + "_balance.csv"))
@@ -50,9 +50,21 @@ def balances():
 def unify():
     """unify all balance sheet in folder"""
     dir = "balances"
-    df = pd.concat(map(pd.read_csv,(os.path.join(dir, file) for file in os.listdir(dir))))
-    df = df.sort_values(['date'])
-    df.to_csv(os.path.join(dir,'total.csv'))
+    bal_df = []
+
+    for x in os.listdir(dir):
+        bal_df.append(pd.read_csv(os.path.join(dir,x)))
+
+    for df in bal_df:
+        df.set_index(['date'], inplace=True)
+
+    df = pd.concat(bal_df, join='outer', axis=1)
+    df.index = pd.DatetimeIndex(df.index)
+    df = df.reindex(pd.date_range(df.index.min(),df.index.max()))
+    df = df.fillna( method='ffill')
+    df = df.reindex(pd.date_range(personal_data.start_date,df.index.max()))
+
+    df.to_csv('total.csv')
 
 
 if __name__ == "__main__":

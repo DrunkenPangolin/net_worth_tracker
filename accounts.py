@@ -33,26 +33,10 @@ def chase(df: pd.DataFrame):
 
 
 def paypal(df: pd.DataFrame):
-    df.columns = [
-        "date",
-        "time",
-        "time_zone",
-        "name",
-        "type",
-        "status",
-        "currency",
-        "gross",
-        "fee",
-        "net",
-        "receipt_id",
-        "balance",
-        "tip",
-    ]
     return df
 
 
 def premium_bonds(df: pd.DataFrame):
-    df.columns = ["date", "description", "amount", "balance", "action"]
     df["category"] = "internal"
 
     change_cat(df, "interest", "description", "prize")
@@ -66,16 +50,6 @@ def premium_bonds(df: pd.DataFrame):
 
 
 def starling(df: pd.DataFrame):
-    df.columns = [
-        "date",
-        "name",
-        "description",
-        "type",
-        "amount",
-        "balance",
-        "category",
-        "notes",
-    ]
 
     # changing categories
     change_cat(
