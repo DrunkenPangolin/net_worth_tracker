@@ -1,9 +1,15 @@
 import datetime
 import pandas as pd
  
-df = pd.read_csv('account_list.csv')
-print(df)
-df.set_index('account_name', inplace=True)
+ACCOUNT_LIST = "account_list.csv"
+account_name = 'Natwest DigiSaver'
 
-df = df.loc['Starling','currency']
-print(df)
+# dropping columns according to account
+
+f = open(ACCOUNT_LIST, "r")
+for x in f.readlines()[1:]:
+    y = x.split(',')
+    if y[0] == account_name:
+        columns = y[3].strip().split('; ')
+        print(columns)
+    

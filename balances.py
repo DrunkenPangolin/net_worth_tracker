@@ -1,4 +1,3 @@
-from cmath import nan
 import os
 import pandas as pd
 import personal_data
@@ -21,6 +20,7 @@ def currency_panda(row: pd.DataFrame) -> pd.DataFrame:
 
 def balances():
     """strips csv file to only date and end of day balance"""
+    
     # change directory and open file
     dir = "csv_data"
     for x in os.listdir(dir):
