@@ -4,6 +4,8 @@ import os
 def init():
     """creates appropriate files and folders for"""
     
+    os.chdir("..")
+
     ACCOUNT_LIST = "account_list.csv"
     FOLDERS = ["csv_data", "balances", "expenses"]
 
