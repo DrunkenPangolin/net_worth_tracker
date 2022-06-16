@@ -53,10 +53,11 @@ def reformat():
                     y = x.split(',')
                     if y[0] == account_name:
                         account_data = y[3].split(';')
-                        if 'date' not in account_data:
-                                continue
                         for heading in account_data:
                             cols.append(heading.strip())
+                        if 'date' not in cols:
+                            print('missing date info')
+                            continue
             except Exception as e:
                 print(str(e) + " function not found")
                 continue
@@ -73,7 +74,6 @@ def reformat():
             df.set_index('date', inplace=True)
             df['currency'] = np.where(df['currency'].isna(), accounts().loc[account_name,'currency'], df['currency'])
 
-            print(df)
             df.to_csv(os.path.join(dir,account_name + ".csv"))              # write to file
  
 
