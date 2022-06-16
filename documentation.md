@@ -1,11 +1,6 @@
 #Documentation
 
-https://streamlit.io?
-
-Implemented
-- No code written... yet!
-
-Plan
+Plan:
 Net Worth
 - Basic net worth tracker involving a pandas dataframe of different accounts (need to find out how to save dataframes to file https://stackoverflow.com/questions/17098654/how-to-reversibly-store-and-load-a-pandas-dataframe-to-from-disk)
 - Require asset type and currency to be specified on each account
@@ -61,3 +56,26 @@ Automation
 - Pull account balances and expenses from MoneyDashboard
 - Pull currency exchange rates from Google(?), these should be individual for each date
 - 
+
+Implemented:
+`init.py`
+- sets up the necessary folder system and creates account_list.csv
+
+`reformat.py`
+- unifies and reformats the csv files from each bank into a uniform format
+- imports functions from `accounts.py` for difficult/non CSVs
+
+`accounts.py`
+- 
+
+`balances.py`
+- converts pandas rows/columns to desired currency
+- strips csv file to only date and end of day balance
+- unify all balance sheet in folder
+
+
+Yet to implement:
+
+
+Useful notes?:
+https://streamlit.io
