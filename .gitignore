@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # private info
-.nw_private
+# .nw_private
