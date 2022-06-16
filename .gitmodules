@@ -1,0 +1,3 @@
+[submodule "nw_private"]
+	path = nw_private
+	url = git@github.com:samjprice/nw_private.git
