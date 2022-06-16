@@ -4,13 +4,8 @@ import os
 def init():
     """creates appropriate files and folders for"""
     
-    os.chdir("..")
-
     ACCOUNT_LIST = "account_list.csv"
     FOLDERS = ["csv_data", "balances", "expenses"]
-
-    for x in FOLDERS:
-        os.makedirs(x, exist_ok=True)
 
     if ACCOUNT_LIST not in os.listdir():
         f = open(ACCOUNT_LIST, "w")
@@ -20,9 +15,14 @@ def init():
         return
     f = open(ACCOUNT_LIST, "r")
 
+    for x in FOLDERS:
+        os.makedirs(x, exist_ok=True)
+
     os.chdir(FOLDERS[0])
     accounts = []
 
+    for x in FOLDERS:
+        os.makedirs(x, exist_ok=True)
     for i in f.readlines()[1:]:
         accounts.append(i.split(","))
     for j in accounts:

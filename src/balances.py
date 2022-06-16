@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import personal_data
+from nw_private import personal_data
 from datetime import date
 from currency_converter import CurrencyConverter
 
