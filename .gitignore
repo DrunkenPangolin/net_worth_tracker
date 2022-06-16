@@ -130,9 +130,3 @@ dmypy.json
 
 # private info
 .nw_private
-personal_data.py
-account_list.csv
-csv_data/
-balances/
-expenses/
-total.csv
