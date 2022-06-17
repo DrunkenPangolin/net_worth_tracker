@@ -2,7 +2,7 @@ from cmath import nan
 import numpy as np
 import os
 import pandas as pd
-from accounts import *
+from csv_converters import *
 
 APP_NAME = "csv_reformatter"
 
@@ -32,11 +32,11 @@ def reformat():
             file_list = os.listdir(path)
 
             # account specific reformat to csv (if required)
-  #          try:
-   #             globals()[account_name.lower().replace(" ", "_")]      # to be imported from accounts.py
-    #        except Exception as e:
-     #           print(str(e) + " function not found")
-      #          continue
+            #try:
+            #    globals()[account_name.lower().replace(" ", "_")]      # to be imported from csv_converters package
+            #except Exception as e:
+            #    print(str(e) + " converter function not found")
+            #    continue
 
             # merging csv files
             try:
@@ -63,7 +63,6 @@ def reformat():
                 continue
             df.columns = cols
 
-
             # dropping unneeded columns
             if 'time' not in list(df.columns):
                 df['time'] = df.index
@@ -72,9 +71,10 @@ def reformat():
             df = df.reindex(columns = DESIRED_COLUMNS)                      # adds & removes columns to create uniform output
             df = df.drop_duplicates()
             df.set_index('date', inplace=True)
-            df['currency'] = np.where(df['currency'].isna(), accounts().loc[account_name,'currency'], df['currency'])
-
-            df.to_csv(os.path.join(dir,account_name + ".csv"))              # write to file
+           # df['currency'] = np.where(df['currency'].isna(), csv_converters().loc[account_name,'currency'], df['currency'])
+            
+            df.to_csv(os.path.join('balances',account_name + ".csv"))              # write to file
+            print('written to file')
  
 
 if __name__ == "__main__":
