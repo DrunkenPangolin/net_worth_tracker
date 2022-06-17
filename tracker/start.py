@@ -1,7 +1,7 @@
 import os
 
 
-def init():
+def start():
     """creates appropriate files and folders for"""
     
     ACCOUNT_LIST = "account_list.csv"
@@ -31,4 +31,4 @@ def init():
 
 
 if __name__ == "__main__":
-    init()
+    start()
