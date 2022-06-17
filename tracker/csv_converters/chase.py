@@ -1,9 +1,10 @@
 import numpy as np
 import pandas as pd
+import tabula
 
-def chase(df: pd.DataFrame):
-    df.columns = ["date", "description", "amount", "balance", "action"]
-    accs = accounts()
+pdf = '/home/sam/Coding/net_worth_tracker/nw_private/csv_data/Chase/Chase Open to 2022-05.pdf'
 
-    # df["currency"] = np.where(accs['account_name'] == inspect.currentframe().f_code.co_name,df
+def chase(pdf):
+    df = tabula.read_pdf(pdf)
+    print(df)
     return df
