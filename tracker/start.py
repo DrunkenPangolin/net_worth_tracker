@@ -21,8 +21,6 @@ def start():
     os.chdir(FOLDERS[0])
     accounts = []
 
-    for x in FOLDERS:
-        os.makedirs(x, exist_ok=True)
     for i in f.readlines()[1:]:
         accounts.append(i.split(","))
     for j in accounts:
