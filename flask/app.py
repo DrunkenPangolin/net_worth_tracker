@@ -4,9 +4,9 @@ app = Flask(__name__)
 
 
 @app.route("/")
-@app.route("/index")
+@app.route("/dashboard")
 def index():
-    return render_template("index.html", title="Index")
+    return render_template("dashboard.html", title="Dashboard")
 
 if __name__ == "__main__":
     app.run(debug=True)
