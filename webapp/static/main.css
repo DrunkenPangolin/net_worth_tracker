@@ -1,0 +1,12 @@
+body {
+  /* background: #e2fbf5;
+  color: #333333; */
+
+  /* For navigation top bar, lowers content down so that top bar is not covering */
+  min-height: 75rem;
+  padding-top: 4.0rem;
+}
+
+/* h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+} */
