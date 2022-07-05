@@ -1,10 +1,15 @@
 #Documentation
 
-Plan:
+Front end - Flask with HTML via Bootstrap
+
+Back end functions - Python
+
 Net Worth
-- Basic net worth tracker involving a pandas dataframe of different accounts (need to find out how to save dataframes to file https://stackoverflow.com/questions/17098654/how-to-reversibly-store-and-load-a-pandas-dataframe-to-from-disk)
+- Basic net worth tracker using pandas
+  - I am now happy importing from and storing dataframes to CSV files (good for debugging too), though would like the app to work via a server and unsure if this would work as online storage, maybe SQL? Unsure
+  https://pandas.pydata.org/docs/reference/frame.html#serialization-io-conversion
 - Require asset type and currency to be specified on each account
-- Date should be independent variable and can track as often or as little as required
+  - Cash account balances imported from CSV complete, need to figure out how to 
 - Portfolio overview and total asset allocation viewed as percentage and absolute values in various currencies
 
 Expenses

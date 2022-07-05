@@ -17,6 +17,7 @@ class registration_form(FlaskForm):
         validators=[
             DataRequired(),
             Email(),
+            Length(max=100),
             ])
     password = PasswordField('Password',
         validators=[

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,26 +19,29 @@
 </head>
 
 <body>
-
-    <!-- Navigation bar (top) -->
-    {% include 'includes/nav-top.html' %}
+    <header>
+        <!-- Navigation bar (top) -->
+        {% include 'includes/nav-top.html' %}
+    </header>
 
     <!-- Main Content -->
     <main class="d-flex flex-nowrap">
-          <div class="container-fluid">
-              <div class="row">
-              </div>
-          </div>
-          {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                  {% for category, message in messages %}
-                      <div class="alert alert-{{ category }}">
-                          {{ message }}
-                      </div>
-                  {% endfor %}
-              {% endif %}
-          {% endwith %}
-          {% block content %}{% endblock content %}
+        <div class="container-fluid">
+            <div class="row">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}          
+            </div>
+            <div class="row">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
     </main>
 
     <!-- Bootstrap JavaScript via delivery network -->
