@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from flask_login import current_user
-from sqlalchemy import Integer
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, FloatField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, FloatField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from webapp.models import User
+from webapp.models import Accounts, User
 
 
 class RegistrationForm(FlaskForm):
@@ -118,23 +117,23 @@ class AddAccountForm(FlaskForm):
             DataRequired(),
         ],
     )
-    type = StringField(
+    account_type = StringField(
         "Account Type",
         validators=[
             DataRequired(),
         ],
     )
-    country = StringField(
-        "Country",
+    currency = StringField(
+        "Currency",
+        validators=[DataRequired(),
+        Length(min=3, max=3)
+        ]
     )
     date_opened = DateField(
         "Date Opened",
         validators=[
             DataRequired(),
         ],
-    )
-    date_closed = DateField(
-        "Date Closed"
     )
     credit_limit = FloatField("Credit Limit")
     benefit = StringField(
@@ -145,8 +144,15 @@ class AddAccountForm(FlaskForm):
     notes = StringField(
         "Notes",
     )
+    submit = SubmitField("Add")
+
 
     def validate_type(self, type):
-        account_types = ['Travel Card', 'Savings Account', 'Credit Card' ,'Current Account']
-        if type.data not in account_types:
+        accepted_account_types = ['Travel Card', 'Savings Account', 'Credit Card' ,'Current Account']
+        if type.data not in accepted_account_types:
             raise ValidationError(f"Type must be one of the following: {account_types}")
+
+    def validate_account_name(self, account_name):
+        account = Accounts.query.filter_by(account_name=account_name.data).first()
+        if account:
+            raise ValidationError("That account name is already registered")

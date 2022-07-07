@@ -23,8 +23,8 @@ class User(db.Model, UserMixin):
 class Accounts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     account_name = db.Column(db.String, nullable=False)
-    type = db.Column(db.String, nullable=False)
-    country = db.Column(db.String)
+    account_type = db.Column(db.String, nullable=False)
+    currency = db.Column(db.String(3))
     date_opened = db.Column(db.Date, nullable=False)
     date_closed = db.Column(db.Date)
     credit_limit = db.Column(db.Float)
@@ -34,4 +34,4 @@ class Accounts(db.Model):
     notes = db.Column(db.String)
 
     def __repr__(self):
-        return 
+        return f"Accounts('{self.account_name}','{self.account_type}','{self.currency}','{self.notes}')"

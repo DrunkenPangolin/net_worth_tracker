@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from webapp import app, db, bcrypt
-from webapp.forms import RegistrationForm, LoginForm, UpdateProfileForm
+from webapp.forms import RegistrationForm, LoginForm, UpdateProfileForm, AddAccountForm
 from webapp.models import Accounts, User
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -116,11 +116,30 @@ def profile():
         "pages/profile.html", title="Profile", image_file=image_file, form=form
     )
 
-@app.route("/accounts")
+@app.route("/accounts", methods=["GET", "POST"])
 @login_required
 def accounts():
+    form = AddAccountForm()
+    if form.validate_on_submit():
+        account=Accounts(
+            account_name = form.account_name.data,
+            account_type = form.account_type.data,
+            currency = form.currency.data,
+            date_opened = form.date_opened.data,
+            credit_limit = form.credit_limit.data,
+            benefit = form.benefit.data,
+            benefit_expiry = form.benefit_expiry.data,
+            pin = form.pin.data,
+            notes = form.notes.data,
+        )
+        db.session.add(account)
+        db.session.commit()
+        flash(
+            f"Account added",
+            "success",
+        )
     account_list = Accounts.query.all()
-    return render_template("pages/accounts.html", title="Accounts", account_list = account_list)
+    return render_template("pages/accounts.html", title="Accounts", form=form, account_list = account_list)
 
 
 @app.route("/balances")
