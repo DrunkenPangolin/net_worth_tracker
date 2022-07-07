@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, FloatField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, FloatField, SelectField
+from wtforms.validators import InputRequired, Length, Email, EqualTo, ValidationError
 from webapp.models import Accounts, User
 
 
@@ -10,21 +10,21 @@ class RegistrationForm(FlaskForm):
     first_name = StringField(
         "First Name",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Length(max=20),
         ],
     )
     last_name = StringField(
         "Last Name",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Length(max=20),
         ],
     )
     email = StringField(
         "Email",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Email(),
             Length(max=100),
         ],
@@ -35,13 +35,13 @@ class RegistrationForm(FlaskForm):
     password = PasswordField(
         "Password",
         validators=[
-            DataRequired(),
+            InputRequired(),
         ],
     )
     confirm_password = PasswordField(
         "Confirm Password",
         validators=[
-            DataRequired(),
+            InputRequired(),
             EqualTo("password"),
         ],
     )
@@ -57,14 +57,14 @@ class LoginForm(FlaskForm):
     email = StringField(
         "Email",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Email(),
         ],
     )
     password = PasswordField(
         "Password",
         validators=[
-            DataRequired(),
+            InputRequired(),
         ],
     )
     remember = BooleanField("Remember Me")
@@ -75,21 +75,21 @@ class UpdateProfileForm(FlaskForm):
     first_name = StringField(
         "First Name",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Length(max=20),
         ],
     )
     last_name = StringField(
         "Last Name",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Length(max=20),
         ],
     )
     email = StringField(
         "Email",
         validators=[
-            DataRequired(),
+            InputRequired(),
             Email(),
             Length(max=100),
         ],
@@ -114,25 +114,37 @@ class AddAccountForm(FlaskForm):
     account_name = StringField(
         "Account Name",
         validators=[
-            DataRequired(),
+            InputRequired(),
         ],
     )
-    account_type = StringField(
+    account_type = SelectField(
         "Account Type",
+        choices=[
+            'Cash',
+            'Credit Card',
+            'Crypto',
+            'Liability',
+            'Liquid Asset',
+            'Non-Liquid Asset',
+            'Material Asset',
+            'Pension',
+            'Savings Account',
+            'Time-Locked Asset',
+            ],
         validators=[
-            DataRequired(),
+            InputRequired(),
         ],
     )
     currency = StringField(
-        "Currency",
-        validators=[DataRequired(),
+        "Currency Code",
+        validators=[InputRequired(),
         Length(min=3, max=3)
         ]
     )
     date_opened = DateField(
         "Date Opened",
         validators=[
-            DataRequired(),
+            InputRequired(),
         ],
     )
     credit_limit = FloatField("Credit Limit")
@@ -146,11 +158,6 @@ class AddAccountForm(FlaskForm):
     )
     submit = SubmitField("Add")
 
-
-    def validate_type(self, type):
-        accepted_account_types = ['Travel Card', 'Savings Account', 'Credit Card' ,'Current Account']
-        if type.data not in accepted_account_types:
-            raise ValidationError(f"Type must be one of the following: {account_types}")
 
     def validate_account_name(self, account_name):
         account = Accounts.query.filter_by(account_name=account_name.data).first()
