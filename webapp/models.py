@@ -12,8 +12,26 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    dob = db.Column(db.DateTime)
     image_file = db.Column(db.String(20), nullable=False, default="default.jpg")
     password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
         return f"User('{self.first_name}','{self.last_name}','{self.email}','{self.image_file}')"
+
+
+class Accounts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    account = db.Column(db.String, nullable=False)
+    type = db.Column(db.String, nullable=False)
+    country = db.Column(db.String)
+    date_opened = db.Column(db.Date, nullable=False)
+    credit_limit = db.Column(db.Float)
+    benefit = db.Column(db.String)
+    benefit_expiry = db.Column(db.Date)
+    date_closed = db.Column(db.Date)
+    pin = db.Column(db.Integer)
+    notes = db.Column(db.String)
+
+    def __repr__(self):
+        return 

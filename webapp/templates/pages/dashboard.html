@@ -1,6 +1,209 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Hello World</h1>
+<h1>Dashboard</h1>
+
+<!-- Full width chart -->
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-chart-area me-1"></i>
+        Area Chart Example
+    </div>
+    <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+</div>
+
+<!-- Content row for information cards-->
+<div class="row">
+
+    <!-- Net Worth Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Net Worth
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            £215,000
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-coins fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Assets Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Total Assets
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            £280,000
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-house-chimney fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liabilities Card  -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                            Liabilities
+                        </div>
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                            £23,000
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-credit-card fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Independence Card -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            FI Percentage
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    25%
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+                                    <!-- style % changes the loading bar -->
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                        style="width: 25%" aria-valuenow="50" aria-valuemin="0"
+                                        aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa-solid fa-champagne-glasses fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Example Table (Maybe to use for accounts page)-->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                    </tr>
+                    <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>63</td>
+                        <td>2011/07/25</td>
+                        <td>$170,750</td>
+                    </tr>
+                    <tr>
+                        <td>Ashton Cox</td>
+                        <td>Junior Technical Author</td>
+                        <td>San Francisco</td>
+                        <td>66</td>
+                        <td>2009/01/12</td>
+                        <td>$86,000</td>
+                    </tr>
+                    <tr>
+                        <td>Cedric Kelly</td>
+                        <td>Senior Javascript Developer</td>
+                        <td>Edinburgh</td>
+                        <td>22</td>
+                        <td>2012/03/29</td>
+                        <td>$433,060</td>
+                    </tr>
+                    <tr>
+                        <td>Airi Satou</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>33</td>
+                        <td>2008/11/28</td>
+                        <td>$162,700</td>
+                    </tr>
+                    <tr>
+                        <td>Brielle Williamson</td>
+                        <td>Integration Specialist</td>
+                        <td>New York</td>
+                        <td>61</td>
+                        <td>2012/12/02</td>
+                        <td>$372,000</td>
+                    </tr>
+                    <tr>
+                        <td>Herrod Chandler</td>
+                        <td>Sales Assistant</td>
+                        <td>San Francisco</td>
+                        <td>59</td>
+                        <td>2012/08/06</td>
+                        <td>$137,500</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Cursus eget nunc scelerisque viverra. Natoque penatibus et magnis dis parturient. Massa sapien faucibus et molestie ac. Tellus cras adipiscing enim eu turpis egestas pretium aenean pharetra. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Et ligula ullamcorper malesuada proin. Urna cursus eget nunc scelerisque viverra mauris. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Adipiscing elit ut aliquam purus. Fusce id velit ut tortor pretium viverra. Eu mi bibendum neque egestas congue. Vitae elementum curabitur vitae nunc sed. Nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Id aliquet risus feugiat in ante. Est velit egestas dui id ornare. Sed augue lacus viverra vitae.
 
@@ -26,4 +229,7 @@ Adipiscing tristique risus nec feugiat in fermentum. Urna condimentum mattis pel
 
 Id aliquet lectus proin nibh nisl condimentum id. In pellentesque massa placerat duis ultricies lacus sed turpis. Sed pulvinar proin gravida hendrerit. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Enim facilisis gravida neque convallis a cras. Semper viverra nam libero justo laoreet sit amet cursus. Sodales neque sodales ut etiam. Arcu dui vivamus arcu felis bibendum ut tristique. Tristique sollicitudin nibh sit amet commodo nulla facilisi. Ut placerat orci nulla pellentesque dignissim enim sit amet. Fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Ut porttitor leo a diam sollicitudin tempor id eu nisl. Id faucibus nisl tincidunt eget nullam non. Nulla at volutpat diam ut.
 </p>
+
+
+
 {% endblock content %}

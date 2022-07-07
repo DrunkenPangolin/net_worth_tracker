@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from webapp import app, db, bcrypt
-from webapp.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from webapp.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from webapp.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -14,7 +14,14 @@ def layout():
 
 
 @app.route("/")
+def splash():
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+    return render_template("pages/splash.html")
+
+
 @app.route("/dashboard")
+@login_required
 def dashboard():
     return render_template("pages/dashboard.html", title="Dashboard")
 
@@ -30,6 +37,7 @@ def register():
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
+            dob=form.dob.data,
             password=hashed_pass,
         )
         db.session.add(user)
@@ -45,7 +53,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("home"))
+        return redirect(url_for("dashboard"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -81,7 +89,7 @@ def save_picture(form_picture, user_id):
 @app.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
-    form = UpdateAccountForm()
+    form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
             old_pic = current_user.image_file
@@ -93,6 +101,7 @@ def profile():
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
         current_user.email = form.email.data
+        current_user.dob = form.dob.data
         db.session.commit()
         flash("Your profile has been updated!", "success")
         return redirect(url_for("profile"))
@@ -100,8 +109,32 @@ def profile():
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+        form.dob.data = current_user.dob
 
     image_file = url_for("static", filename="profile_pics/" + current_user.image_file)
     return render_template(
         "pages/profile.html", title="Profile", image_file=image_file, form=form
     )
+
+@app.route("/accounts")
+@login_required
+def accounts():
+    return render_template("pages/accounts.html", title="Accounts")
+
+
+@app.route("/balances")
+@login_required
+def balances():
+    return render_template("pages/balances.html", title="Balances")
+
+
+@app.route("/expenses")
+@login_required
+def expenses():
+    return render_template("pages/expenses.html", title="Expenses")
+
+
+@app.route("/settings")
+@login_required
+def settings():
+    return render_template("pages/settings.html", title="Settings")
