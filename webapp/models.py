@@ -22,15 +22,15 @@ class User(db.Model, UserMixin):
 
 class Accounts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    account = db.Column(db.String, nullable=False)
+    account_name = db.Column(db.String, nullable=False)
     type = db.Column(db.String, nullable=False)
     country = db.Column(db.String)
     date_opened = db.Column(db.Date, nullable=False)
+    date_closed = db.Column(db.Date)
     credit_limit = db.Column(db.Float)
     benefit = db.Column(db.String)
     benefit_expiry = db.Column(db.Date)
-    date_closed = db.Column(db.Date)
-    pin = db.Column(db.Integer)
+    pin = db.Column(db.String)
     notes = db.Column(db.String)
 
     def __repr__(self):

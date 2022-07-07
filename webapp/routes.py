@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from webapp import app, db, bcrypt
 from webapp.forms import RegistrationForm, LoginForm, UpdateProfileForm
-from webapp.models import User
+from webapp.models import Accounts, User
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -119,7 +119,8 @@ def profile():
 @app.route("/accounts")
 @login_required
 def accounts():
-    return render_template("pages/accounts.html", title="Accounts")
+    account_list = Accounts.query.all()
+    return render_template("pages/accounts.html", title="Accounts", account_list = account_list)
 
 
 @app.route("/balances")

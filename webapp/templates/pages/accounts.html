@@ -1,79 +1,96 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1>{{title}} page</h1>
+    <h1>{{title}} page</h1>
 
-<!-- Example Table (Maybe to use for accounts page)-->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Account</th>
-                        <th>Type</th>
-                        <th>Date Opened</th>
-                        <th>Credit Limit</th>
-                        <th>Benefit</th>
-                        <th>Benefit Expiry</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Account</th>
-                        <th>Type</th>
-                        <th>Date Opened</th>
-                        <th>Credit Limit</th>
-                        <th>Benefit</th>
-                        <th>Benefit Expiry</th>
-                        <th>Notes</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <td>Travel Card Example</td>
-                        <td>Travel Card</td>
-                        <td>Jan 2017</td>
-                        <td>N/A</td>
-                        <td>Travel</td>
-                        <td>N/A</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Current Account Example</td>
-                        <td>Current Account</td>
-                        <td>Sept 2019</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Credit Card Example</td>
-                        <td>Credit Card</td>
-                        <td>Aug 2020</td>
-                        <td>£3,000</td>
-                        <td>0% Interest</td>
-                        <td>N/A</td>
-                        <td>DD Full balance from Current Account Example</td>
-                    </tr>
-                    <tr>
-                        <td>Savings Account Example</td>
-                        <td>Savings Account</td>
-                        <td>Dec 2022</td>
-                        <td>N/A</td>
-                        <td>3% Interest</td>
-                        <td>N/A</td>
-                        <td>3% interest on values up to £1000</td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Example Table (Maybe to use for accounts page)-->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Account</th>
+                            <th>Type</th>
+                            <th>Date Opened</th>
+                            <th>Credit Limit</th>
+                            <th>Benefit</th>
+                            <th>Benefit Expiry</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Account</th>
+                            <th>Type</th>
+                            <th>Date Opened</th>
+                            <th>Credit Limit</th>
+                            <th>Benefit</th>
+                            <th>Benefit Expiry</th>
+                            <th>Notes</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+
+                        {% for account in account_list %}
+
+                        <tr>
+                            <td>account.account_name</td>
+                            <td>account.type</td>
+                            <td>account.date_opened</td>
+                            <td>account.credit_limit</td>
+                            <td>account.benefit</td>
+                            <td>account.benefit_expiry</td>
+                            <td>account.notes</td>
+                        </tr>
+
+                        {% endfor %}
+
+
+
+                        <tr>
+                            <td>Travel Card Example</td>
+                            <td>Travel Card</td>
+                            <td>Jan 2017</td>
+                            <td>N/A</td>
+                            <td>Travel</td>
+                            <td>N/A</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Current Account Example</td>
+                            <td>Current Account</td>
+                            <td>Sept 2019</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Credit Card Example</td>
+                            <td>Credit Card</td>
+                            <td>Aug 2020</td>
+                            <td>£3,000</td>
+                            <td>0% Interest</td>
+                            <td>N/A</td>
+                            <td>DD Full balance from Current Account Example</td>
+                        </tr>
+                        <tr>
+                            <td>Savings Account Example</td>
+                            <td>Savings Account</td>
+                            <td>Dec 2022</td>
+                            <td>N/A</td>
+                            <td>3% Interest</td>
+                            <td>N/A</td>
+                            <td>3% interest on values up to £1000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 {% endblock content %}
