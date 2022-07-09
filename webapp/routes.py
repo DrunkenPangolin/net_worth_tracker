@@ -163,3 +163,9 @@ def settings():
 @app.route("/site_info")
 def site_info():
     return render_template("pages/site_info.html", title = "Site Info")
+
+@app.route("/financial_independence")
+@login_required
+def fi():
+    return render_template("pages/financial_independence.html", title = "Financial Independence")
+
