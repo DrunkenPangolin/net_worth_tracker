@@ -158,3 +158,8 @@ def expenses():
 @login_required
 def settings():
     return render_template("pages/settings.html", title="Settings")
+
+
+@app.route("/site_info")
+def site_info():
+    return render_template("pages/site_info.html", title = "Site Info")
