@@ -38,7 +38,7 @@
                         {% for account in account_list %}
 
                         <tr>
-                            <td>{{account.account_name}}</td>
+                            <td><a href="{{ url_for('account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
                             <td>{{account.account_type}}</td>
                             <td>{{account.date_opened}}</td>
                             <td>{{account.currency}} {{account.credit_limit}}</td>
@@ -49,44 +49,6 @@
 
                         {% endfor %}
 
-
-
-                        <tr>
-                            <td>Travel Card Example</td>
-                            <td>Travel Card</td>
-                            <td>Jan 2017</td>
-                            <td>N/A</td>
-                            <td>Travel</td>
-                            <td>N/A</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Current Account Example</td>
-                            <td>Current Account</td>
-                            <td>Sept 2019</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Credit Card Example</td>
-                            <td>Credit Card</td>
-                            <td>Aug 2020</td>
-                            <td>£3,000</td>
-                            <td>0% Interest</td>
-                            <td>N/A</td>
-                            <td>DD Full balance from Current Account Example</td>
-                        </tr>
-                        <tr>
-                            <td>Savings Account Example</td>
-                            <td>Savings Account</td>
-                            <td>Dec 2022</td>
-                            <td>N/A</td>
-                            <td>3% Interest</td>
-                            <td>N/A</td>
-                            <td>3% interest on values up to £1000</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

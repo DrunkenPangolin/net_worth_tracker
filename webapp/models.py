@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     dob = db.Column(db.DateTime)
     profile_pic = db.Column(db.String(20), nullable=False, default="default.jpg")
     password = db.Column(db.String(60), nullable=False)
+    accounts = db.relationship('Accounts', backref="account_owner", lazy=True)
 
     def __repr__(self):
         return f"User('{self.first_name}','{self.last_name}','{self.email}','{self.image_file}')"
@@ -32,6 +33,7 @@ class Accounts(db.Model):
     benefit_expiry = db.Column(db.Date)
     pin = db.Column(db.String)
     notes = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
         return f"Accounts('{self.account_name}','{self.account_type}','{self.currency}','{self.notes}')"

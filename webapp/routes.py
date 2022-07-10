@@ -10,8 +10,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/layout")
 def layout():
-    profile_pic = url_for("static", filename="profile_pics/" + current_user.profile_pic)
-    return render_template("layout.html", profile_pic=profile_pic)
+    return render_template("layout.html")
 
 
 @app.route("/")
@@ -112,9 +111,8 @@ def profile():
         form.email.data = current_user.email
         form.dob.data = current_user.dob
 
-    profile_pic = url_for("static", filename="profile_pics/" + current_user.profile_pic)
     return render_template(
-        "pages/profile.html", title="Profile", profile_pic=profile_pic, form=form
+        "pages/profile.html", title="Profile", form=form
     )
 
 @app.route("/accounts", methods=["GET", "POST"])
@@ -132,6 +130,7 @@ def accounts():
             benefit_expiry = form.benefit_expiry.data,
             pin = form.pin.data,
             notes = form.notes.data,
+            account_owner = current_user
         )
         db.session.add(account)
         db.session.commit()
@@ -141,6 +140,13 @@ def accounts():
         )
     account_list = Accounts.query.all()
     return render_template("pages/accounts.html", title="Accounts", form=form, account_list = account_list)
+
+
+@app.route("/accounts/<int:account_id>", methods=["GET", "POST"])
+@login_required
+def account_info(account_id):
+    account = Accounts.query.get_or_404(account_id)
+    return render_template("pages/account_info.html", title=account.account_name)
 
 
 @app.route("/balances")
@@ -164,6 +170,7 @@ def settings():
 @app.route("/site_info")
 def site_info():
     return render_template("pages/site_info.html", title = "Site Info")
+
 
 @app.route("/financial_independence")
 @login_required

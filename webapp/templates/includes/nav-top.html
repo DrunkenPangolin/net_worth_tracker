@@ -30,10 +30,12 @@
         <!-- User functions -->
         <div class="navbar-nav">
             {% if current_user.is_authenticated %}
-
+                <li class="nav-item nav-link">
+                    {{ current_user.first_name }}
+                </li>
                 <div class="flex-shrink-0 dropdown">
                     <a class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{image_file}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                        <img src="{{url_for("static", filename="profile_pics/" + current_user.profile_pic)}}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-110px, 34px);" data-popper-placement="bottom-end">
                         <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
