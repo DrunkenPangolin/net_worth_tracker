@@ -10,7 +10,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/layout")
 def layout():
-    return render_template("layout.html")
+    profile_pic = url_for("static", filename="profile_pics/" + current_user.profile_pic)
+    return render_template("layout.html", profile_pic=profile_pic)
 
 
 @app.route("/")
@@ -92,9 +93,9 @@ def profile():
     form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
-            old_pic = current_user.image_file
+            old_pic = current_user.profile_pic
             picture_file = save_picture(form.picture.data, str(current_user.id))
-            current_user.image_file = picture_file
+            current_user.profile_pic = picture_file
             if old_pic != "default.jpg":
                 os.remove(os.path.join(app.root_path, "static/profile_pics", old_pic))
 
@@ -111,9 +112,9 @@ def profile():
         form.email.data = current_user.email
         form.dob.data = current_user.dob
 
-    image_file = url_for("static", filename="profile_pics/" + current_user.image_file)
+    profile_pic = url_for("static", filename="profile_pics/" + current_user.profile_pic)
     return render_template(
-        "pages/profile.html", title="Profile", image_file=image_file, form=form
+        "pages/profile.html", title="Profile", profile_pic=profile_pic, form=form
     )
 
 @app.route("/accounts", methods=["GET", "POST"])
@@ -169,3 +170,8 @@ def site_info():
 def fi():
     return render_template("pages/financial_independence.html", title = "Financial Independence")
 
+
+@app.route("/documents")
+@login_required
+def documents():
+    return render_template("pages/documents.html", title = "Documents")

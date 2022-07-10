@@ -17,24 +17,34 @@
                 <a class="nav-link" href="{{ url_for('balances') }}">Balances</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('documents') }}">Documents</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('expenses') }}">Expenses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('fi') }}">FI</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('settings') }}">Settings</a>
-          </li>
         </ul>
 
         <!-- User functions -->
         <div class="navbar-nav">
             {% if current_user.is_authenticated %}
-              <a class="nav-item nav-link" href="{{ url_for('profile') }}">Profile</a>
-              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+
+                <div class="flex-shrink-0 dropdown">
+                    <a class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{image_file}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-110px, 34px);" data-popper-placement="bottom-end">
+                        <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                    </ul>
+                </div>
             {% else %}
-              <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-              <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
             {% endif %}
         </div>
     </div>
