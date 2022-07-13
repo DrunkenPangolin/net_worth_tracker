@@ -136,7 +136,7 @@ def accounts():
             "success",
         )
     account_list = Account.query.filter_by(account_owner=current_user)
-    return render_template("pages/accounts.html", title="Account", form=form, account_list = account_list)
+    return render_template("pages/accounts.html", title="Accounts", form=form, account_list = account_list)
 
 
 @app.route("/accounts/<int:account_id>", methods=["GET", "POST"])
@@ -146,10 +146,20 @@ def account_info(account_id):
     if account.account_owner != current_user:
         abort(404) 
     else:
-        return render_template("pages/account_info.html", title=account.account_name) 
+        return render_template("pages/account_info.html", account=account, title=account.account_name) 
 
 
 @app.route("/accounts/<int:account_id>/update", methods=["GET", "POST"])
+@login_required
+def update_account(account_id):
+    account = Account.query.get_or_404(account_id)
+    if account.account_owner != current_user:
+        abort(404) 
+    else:
+        return render_template("pages/update_account.html", account=account, title=account.account_name) 
+
+
+@app.route("/accounts/<int:account_id>/delete", methods=["GET", "POST"])
 @login_required
 def delete_account(account_id):
     account = Account.query.get_or_404(account_id)
@@ -162,10 +172,10 @@ def delete_account(account_id):
 
 
 
-@app.route("/balances")
+@app.route("/portfolio")
 @login_required
-def balances():
-    return render_template("pages/balances.html", title="Balances")
+def portfolio():
+    return render_template("pages/portfolio.html", title="Portfolio")
 
 
 @app.route("/expenses")

@@ -8,7 +8,7 @@ from webapp.models import Account, User
 
 class RegistrationForm(FlaskForm):
     name = StringField(
-        "First Name",
+        "Name",
         validators=[
             InputRequired(),
             Length(max=20),
@@ -66,7 +66,7 @@ class LoginForm(FlaskForm):
 
 class UpdateProfileForm(FlaskForm):
     name = StringField(
-        "First Name",
+        "Name",
         validators=[
             InputRequired(),
             Length(max=20),
@@ -93,6 +93,8 @@ class UpdateProfileForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("That email is already registered")
+
+
 
 
 
@@ -146,6 +148,6 @@ class AccountForm(FlaskForm):
 
 
     def validate_account_name(self, account_name):
-        account = Account.query.filter_by(account_name=account_name.data).first()
+        account = Account.query.filter_by(account_name=account_name.data, user_id=current_user.id).first()
         if account:
             raise ValidationError("That account name is already registered")

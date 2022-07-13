@@ -1,5 +1,34 @@
 #Documentation
 
+Bugs:
+CSS
+- Drop down box in menu is too high (adjusted correctly when name isn't present)
+- Drop down box in menu drops left, on phone view this is off screen
+- All CSS to do with forms
+- No x to quit on flash messages
+
+Flask
+- FlaskForm doesn't validate if there is an additional section in form that doesn't appear in page, I would like to use the same form for updates as well as initial adding to database
+
+Database
+- AccountForm requires input for Credit Limit (default=0) and Benefit Expiry (default=None)
+
+Python
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Front end - Flask with HTML via Bootstrap
 
 Back end functions - Python

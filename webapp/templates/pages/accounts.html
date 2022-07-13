@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h1 class="mb-4">{{title}} page</h1>
 
     <!-- Example Table (Maybe to use for accounts page)-->
     <div class="card shadow mb-4">
@@ -19,7 +18,7 @@
                             <th>Notes</th>
                         </tr>
                     </thead>
-                    <tfoot>
+        <!--             <tfoot>
                         <tr>
                             <th>Account</th>
                             <th>Type</th>
@@ -29,7 +28,7 @@
                             <th>Benefit Expiry</th>
                             <th>Notes</th>
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                     <tbody>
 
                         {% for account in account_list %}

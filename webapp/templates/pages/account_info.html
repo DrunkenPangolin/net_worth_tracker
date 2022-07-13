@@ -1,14 +1,66 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <h1 class="mb-4">{{title}}</h1>
 
-    {% if account.author == current_user %}
+    {% if account.account_owner == current_user %}
         <div>
-        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_account', account_id=account.id) }}">Update</a>
-        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_account', account_id=account.id) }}">Update Account Details</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
         </div>
     {% endif %}
+
+
+    <!-- Example Table (Maybe to use for accounts page)-->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Currency</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+        <!--             <tfoot>
+                        <tr>
+                            <th>Account</th>
+                            <th>Type</th>
+                            <th>Date Opened</th>
+                            <th>Credit Limit</th>
+                            <th>Benefit</th>
+                            <th>Benefit Expiry</th>
+                            <th>Notes</th>
+                        </tr>
+                    </tfoot> -->
+                    <tbody>
+
+                        {% for account in account_list %}
+
+                        <tr>
+                            <td>{{account.account_name}}</td>
+                            <td>{{account.account_type}}</td>
+                            <td>{{account.date_opened}}</td>
+                            <td>{{account.currency}} {{account.credit_limit}}</td>
+                            <td>{{account.benefit}}</td>
+                            <td>{{account.benefit_expiry}}</td>
+                            <td>{{account.notes}}</td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
