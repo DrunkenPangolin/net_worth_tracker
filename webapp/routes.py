@@ -1,10 +1,10 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from webapp import app, db, bcrypt
-from webapp.forms import RegistrationForm, LoginForm, UpdateProfileForm, AddAccountForm
-from webapp.models import Accounts, User
+from webapp.forms import RegistrationForm, LoginForm, UpdateProfileForm, AccountForm
+from webapp.models import Account, User
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -34,8 +34,7 @@ def register():
     if form.validate_on_submit():
         hashed_pass = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
         user = User(
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
+            name=form.name.data,
             email=form.email.data,
             dob=form.dob.data,
             password=hashed_pass,
@@ -43,7 +42,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(
-            f"Profile created for {form.first_name.data} {form.last_name.data}, you are now able to log in",
+            f"Profile created for {form.name.data}, you are now able to log in",
             "success",
         )
         return redirect(url_for("login"))
@@ -98,16 +97,14 @@ def profile():
             if old_pic != "default.jpg":
                 os.remove(os.path.join(app.root_path, "static/profile_pics", old_pic))
 
-        current_user.first_name = form.first_name.data
-        current_user.last_name = form.last_name.data
+        current_user.name = form.name.data
         current_user.email = form.email.data
         current_user.dob = form.dob.data
         db.session.commit()
         flash("Your profile has been updated!", "success")
         return redirect(url_for("profile"))
     elif request.method == "GET":
-        form.first_name.data = current_user.first_name
-        form.last_name.data = current_user.last_name
+        form.name.data = current_user.name
         form.email.data = current_user.email
         form.dob.data = current_user.dob
 
@@ -118,9 +115,9 @@ def profile():
 @app.route("/accounts", methods=["GET", "POST"])
 @login_required
 def accounts():
-    form = AddAccountForm()
+    form = AccountForm()
     if form.validate_on_submit():
-        account=Accounts(
+        account=Account(
             account_name = form.account_name.data,
             account_type = form.account_type.data,
             currency = form.currency.data,
@@ -138,15 +135,31 @@ def accounts():
             f"Account added",
             "success",
         )
-    account_list = Accounts.query.all()
-    return render_template("pages/accounts.html", title="Accounts", form=form, account_list = account_list)
+    account_list = Account.query.filter_by(account_owner=current_user)
+    return render_template("pages/accounts.html", title="Account", form=form, account_list = account_list)
 
 
 @app.route("/accounts/<int:account_id>", methods=["GET", "POST"])
 @login_required
 def account_info(account_id):
-    account = Accounts.query.get_or_404(account_id)
-    return render_template("pages/account_info.html", title=account.account_name)
+    account = Account.query.get_or_404(account_id)
+    if account.account_owner != current_user:
+        abort(404) 
+    else:
+        return render_template("pages/account_info.html", title=account.account_name) 
+
+
+@app.route("/accounts/<int:account_id>/update", methods=["GET", "POST"])
+@login_required
+def delete_account(account_id):
+    account = Account.query.get_or_404(account_id)
+    if account.account_owner != current_user:
+        abort(404) 
+    else:
+        db.session.delete(account)
+        db.session.commit()
+        return redirect(url_for("accounts"))
+
 
 
 @app.route("/balances")

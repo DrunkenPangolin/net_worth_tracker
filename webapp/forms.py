@@ -1,21 +1,14 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, FloatField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, IntegerField, SelectField
 from wtforms.validators import InputRequired, Length, Email, EqualTo, ValidationError
-from webapp.models import Accounts, User
+from webapp.models import Account, User
 
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField(
+    name = StringField(
         "First Name",
-        validators=[
-            InputRequired(),
-            Length(max=20),
-        ],
-    )
-    last_name = StringField(
-        "Last Name",
         validators=[
             InputRequired(),
             Length(max=20),
@@ -72,15 +65,8 @@ class LoginForm(FlaskForm):
 
 
 class UpdateProfileForm(FlaskForm):
-    first_name = StringField(
+    name = StringField(
         "First Name",
-        validators=[
-            InputRequired(),
-            Length(max=20),
-        ],
-    )
-    last_name = StringField(
-        "Last Name",
         validators=[
             InputRequired(),
             Length(max=20),
@@ -110,7 +96,7 @@ class UpdateProfileForm(FlaskForm):
 
 
 
-class AddAccountForm(FlaskForm):
+class AccountForm(FlaskForm):
     account_name = StringField(
         "Account Name",
         validators=[
@@ -147,7 +133,7 @@ class AddAccountForm(FlaskForm):
             InputRequired(),
         ],
     )
-    credit_limit = FloatField("Credit Limit")
+    credit_limit = IntegerField("Credit Limit")
     benefit = StringField(
         "Account Benefit",
     )
@@ -160,6 +146,6 @@ class AddAccountForm(FlaskForm):
 
 
     def validate_account_name(self, account_name):
-        account = Accounts.query.filter_by(account_name=account_name.data).first()
+        account = Account.query.filter_by(account_name=account_name.data).first()
         if account:
             raise ValidationError("That account name is already registered")
