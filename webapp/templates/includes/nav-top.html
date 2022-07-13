@@ -29,14 +29,14 @@
                   <li><a class="dropdown-item" href="{{ url_for('documents') }}">Documents </a></li>
                   <li><a class="dropdown-item" href="#">Sinking Fund</a></li>
                 </ul>
-              </li>
+            </li>
         </ul>
 
         <!-- User functions -->
         <div class="navbar-nav">
             {% if current_user.is_authenticated %}
                 <div class="flex-shrink-0 dropdown">
-                    <a class="d-block link-light dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="d-block link-light dropdown-toggle" href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ current_user.name }}
                         <img src="{{url_for('static', filename='profile_pics/' + current_user.profile_pic)}}" alt="mdo" width="32" height="32" class="rounded-circle mx-1">
                     </a>
