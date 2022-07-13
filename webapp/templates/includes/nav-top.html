@@ -17,27 +17,30 @@
                 <a class="nav-link" href="{{ url_for('accounts') }}">Accounts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('documents') }}">Documents</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('expenses') }}">Expenses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('fi') }}">FI</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
+                  <li><a class="dropdown-item" href="#">Compound Interest Calculator</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('documents') }}">Documents </a></li>
+                  <li><a class="dropdown-item" href="#">Sinking Fund</a></li>
+                </ul>
+              </li>
         </ul>
 
         <!-- User functions -->
         <div class="navbar-nav">
             {% if current_user.is_authenticated %}
-                <li class="nav-item nav-link">
-                    {{ current_user.name }}
-                </li>
                 <div class="flex-shrink-0 dropdown">
-                    <a class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{url_for("static", filename="profile_pics/" + current_user.profile_pic)}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <a class="d-block link-light dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ current_user.name }}
+                        <img src="{{url_for('static', filename='profile_pics/' + current_user.profile_pic)}}" alt="mdo" width="32" height="32" class="rounded-circle mx-1">
                     </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(-110px, 34px);" data-popper-placement="bottom-end">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
                         <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
                         <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>

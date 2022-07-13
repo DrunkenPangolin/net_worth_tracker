@@ -151,12 +151,13 @@ def account_info(account_id):
 
 @app.route("/accounts/<int:account_id>/update", methods=["GET", "POST"])
 @login_required
-def update_account(account_id):
+def account_update(account_id):
     account = Account.query.get_or_404(account_id)
+    form = AccountForm()
     if account.account_owner != current_user:
         abort(404) 
     else:
-        return render_template("pages/update_account.html", account=account, title=account.account_name) 
+        return render_template("pages/account_update.html", form=form, account=account, title=account.account_name) 
 
 
 @app.route("/accounts/<int:account_id>/delete", methods=["GET", "POST"])

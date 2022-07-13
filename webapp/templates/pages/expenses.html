@@ -5,14 +5,13 @@
 <!-- Charts -->
 <div class="row mx-auto">
 
-    <!-- Net Worth Chart Over Time -->
+    <!-- Expenses Chart Over Time -->
     <div class="col-xl-8 col-lg-7 mb-4">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0">Net Worth Chart</h6>
+                <h6 class="m-0">Expenses Chart over Time (rolling month/per calendar month?)</h6>
             </div>
             <div class="card-body"><canvas id="myAreaChart" width="100%" height="250"></canvas></div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
     </div>
 
@@ -23,7 +22,6 @@
                 <h6 class="m-0">Expense Categories Chart</h6>
             </div>
             <div class="card-body"><canvas id="myAreaChart" width="100%" height="250"></canvas></div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
     </div>
 </div>
@@ -41,81 +39,48 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Outgoings</th>
+                                <th>Daily</th>
+                                <th>Weekly</th>
+                                <th>Monthly</th>
+                                <th>Annually</th>
+                                <th>Percentage of Outgoings</th>
                             </tr>
                         </thead>
                         <tfoot>
+
+
+                            {% for account in [("Necessity", "7.02", "49.31", "213.67", "2564.09", "0.3243"),("Discretionary", "14.62", "102.73", "445.15", "5341.77", "0.6757"),("TOTAL", "21.65", "152.04", "658.82", "7905.86", "1")] %}
+
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>{{account[0]}}</th>
+                                <th>{{account[1]}}</th>
+                                <th>{{account[2]}}</th>
+                                <th>{{account[3]}}</th>
+                                <th>{{account[4]}}</th>
+                                <th>{{account[5]}}</th>
+                                <th>{{account[6]}}</th>
                             </tr>
+
+                            {% endfor %}
                         </tfoot>
                         <tbody>
+
+
+                        {% for account in [("Education", "1.6", "11.23", "48.68", "584.18", "0.0739"),("Entertainment", "3.57", "25.1", "108.76", "1305.15", "0.16510000000000002"),("Food", "3.79", "26.63", "115.4", "1384.75", "0.1752"),("Health", "1.11", "7.82", "33.9", "406.82", "0.051500000000000004"),("Hobbies", "0.95", "6.68", "28.95", "347.42", "0.043899999999999995"),("Housing", "0", "0", "0", "0", "0"),("Loans", "0", "0", "0", "0", "0"),("Pets", "0", "0", "0", "0", "0"),("Phone", "0.72", "5.07", "21.98", "263.81", "0.0334"),("Purchases", "0.76", "5.35", "23.2", "278.36", "0.0352"),("Transport", "3.4", "23.89", "103.52", "1242.21", "0.15710000000000002"),("Travel", "3.4", "23.9", "103.56", "1242.71", "0.1572"),("Work", "1.07", "7.53", "32.62", "391.43", "0.0495"),("Miscellaneous", "1.26", "8.83", "38.25", "459.03", "0.0581")] %}
+
                             <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
+                                <td>{{account[0]}}</td>
+                                <td>{{account[1]}}</td>
+                                <td>{{account[2]}}</td>
+                                <td>{{account[3]}}</td>
+                                <td>{{account[4]}}</td>
+                                <td>{{account[5]}}</td>
+                                <td>{{account[6]}}</td>
                             </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009/01/12</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>2012/03/29</td>
-                                <td>$433,060</td>
-                            </tr>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>33</td>
-                                <td>2008/11/28</td>
-                                <td>$162,700</td>
-                            </tr>
-                            <tr>
-                                <td>Brielle Williamson</td>
-                                <td>Integration Specialist</td>
-                                <td>New York</td>
-                                <td>61</td>
-                                <td>2012/12/02</td>
-                                <td>$372,000</td>
-                            </tr>
-                            <tr>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td>59</td>
-                                <td>2012/08/06</td>
-                                <td>$137,500</td>
-                            </tr>
+
+                        {% endfor %}
+
 
                         </tbody>
                     </table>
