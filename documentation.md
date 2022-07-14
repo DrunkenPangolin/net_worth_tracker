@@ -17,7 +17,8 @@ Flask
 
 Database and Forms
 - AccountForm/UpdateAccountForm requires input for Credit Limit (default=0), Benefit Expiry (default=None), Close Date
--
+- UpdateAccountForm doesn't autofill dates or selector fields
+- 
 
 Python
 - 
