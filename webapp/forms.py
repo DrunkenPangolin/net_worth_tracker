@@ -1,9 +1,19 @@
+from random import choices
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField, IntegerField, SelectField
+from wtforms import (
+    StringField,
+    PasswordField,
+    SubmitField,
+    BooleanField,
+    DateField,
+    IntegerField,
+    SelectField,
+)
 from wtforms.validators import InputRequired, Length, Email, EqualTo, ValidationError
 from webapp.models import Account, User
+from webapp.form_lists import account_types, currencies
 
 
 class RegistrationForm(FlaskForm):
@@ -11,7 +21,7 @@ class RegistrationForm(FlaskForm):
         "Name",
         validators=[
             InputRequired(),
-            Length(max=20),
+            Length(max=30),
         ],
     )
     email = StringField(
@@ -22,9 +32,7 @@ class RegistrationForm(FlaskForm):
             Length(max=100),
         ],
     )
-    dob = DateField(
-        "Date of birth"
-    )
+    dob = DateField("Date of birth")
     password = PasswordField(
         "Password",
         validators=[
@@ -69,7 +77,7 @@ class UpdateProfileForm(FlaskForm):
         "Name",
         validators=[
             InputRequired(),
-            Length(max=20),
+            Length(max=30),
         ],
     )
     email = StringField(
@@ -80,9 +88,7 @@ class UpdateProfileForm(FlaskForm):
             Length(max=100),
         ],
     )
-    dob = DateField(
-        "Date of birth"
-    )
+    dob = DateField("Date of birth")
     picture = FileField(
         "Update Profile Picture", validators=[FileAllowed(["jpg", "png"])]
     )
@@ -95,9 +101,6 @@ class UpdateProfileForm(FlaskForm):
                 raise ValidationError("That email is already registered")
 
 
-
-
-
 class AccountForm(FlaskForm):
     account_name = StringField(
         "Account Name",
@@ -107,27 +110,17 @@ class AccountForm(FlaskForm):
     )
     account_type = SelectField(
         "Account Type",
-        choices=[
-            'Cash',
-            'Credit Card',
-            'Crypto',
-            'Liability',
-            'Liquid Asset',
-            'Non-Liquid Asset',
-            'Material Asset',
-            'Pension',
-            'Savings Account',
-            'Time-Locked Asset',
-            ],
+        choices=account_types,
         validators=[
             InputRequired(),
         ],
     )
-    currency = StringField(
+    currency = SelectField(
         "Currency Code",
-        validators=[InputRequired(),
-        Length(min=3, max=3)
-        ]
+        choices=currencies,
+        validators=[
+            InputRequired(),
+        ],
     )
     date_opened = DateField(
         "Date Opened",
@@ -144,10 +137,58 @@ class AccountForm(FlaskForm):
     notes = StringField(
         "Notes",
     )
-    submit = SubmitField("Add")
-
+    submit = SubmitField("Add Account")
 
     def validate_account_name(self, account_name):
-        account = Account.query.filter_by(account_name=account_name.data, user_id=current_user.id).first()
+        account = Account.query.filter_by(
+            account_name=account_name.data, user_id=current_user.id
+        ).first()
+        if account:
+            raise ValidationError("That account name is already registered")
+
+
+class UpdateAccountForm(FlaskForm):
+    account_name = StringField(
+        "Account Name",
+        validators=[
+            InputRequired(),
+        ],
+    )
+    account_type = SelectField(
+        "Account Type",
+        choices=account_types,
+        validators=[
+            InputRequired(),
+        ],
+    )
+    currency = SelectField(
+        "Currency Code",
+        choices=currencies,
+        validators=[
+            InputRequired(),
+        ],
+    )
+    date_opened = DateField(
+        "Date Opened",
+        validators=[
+            InputRequired(),
+        ],
+    )
+    date_closed = DateField("Date Closed")
+    credit_limit = IntegerField("Credit Limit")
+    benefit = StringField(
+        "Account Benefit",
+    )
+    benefit_expiry = DateField("Benefit Expiry")
+    pin = StringField("PIN")
+    notes = StringField(
+        "Notes",
+    )
+    submit = SubmitField("Update")
+
+    def validate_account_name(self, account_name):
+        account = Account.query.filter_by(
+            account_name=account_name.data, user_id=current_user.id
+        ).first()
         if account:
             raise ValidationError("That account name is already registered")

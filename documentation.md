@@ -1,20 +1,22 @@
 #Documentation
 
 Bugs:
-CSS
+CSS/HTML
 - All CSS to do with forms
 - No x to quit on flash messages
-- Cursor not changing to hand (implying it is possible to click) on profile photo/name
-- 
+- Menus on left and right of navbar don't line up exactly straight
+- button for closing account?
+- put profile update in modal, combine profile and settings page
+- fix margins on FI tab for table
+- fix margins on Accounts tab
+- Would like a toggle for showing closed accounts
+-
 
 Flask
-- Import currencies for use in accounts form with selector
-- Need to pass value for account id to update page
 -
 
 Database and Forms
-- AccountForm requires input for Credit Limit (default=0) and Benefit Expiry (default=None)
-- FlaskForm doesn't validate if there is an additional section in form that doesn't appear in page, I would like to use the same form for updates as well as initial adding to database
+- AccountForm/UpdateAccountForm requires input for Credit Limit (default=0), Benefit Expiry (default=None), Close Date
 -
 
 Python

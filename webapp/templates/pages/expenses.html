@@ -9,7 +9,7 @@
     <div class="col-xl-8 col-lg-7 mb-4">
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0">Expenses Chart over Time (rolling month/per calendar month?)</h6>
+                <h6 class="m-0">Expenses Chart over Time (per calendar month?)</h6>
             </div>
             <div class="card-body"><canvas id="myAreaChart" width="100%" height="250"></canvas></div>
         </div>
@@ -32,7 +32,7 @@
     <div>
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0">DataTables Example</h6>
+                <h6 class="m-0">Expenses Breakdown (I'd liked this to be interactive, click to expand category)</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -49,7 +49,7 @@
                         </thead>
                         <tfoot>
 
-
+                            <!-- example data -->
                             {% for account in [("Necessity", "7.02", "49.31", "213.67", "2564.09", "0.3243"),("Discretionary", "14.62", "102.73", "445.15", "5341.77", "0.6757"),("TOTAL", "21.65", "152.04", "658.82", "7905.86", "1")] %}
 
                             <tr>
