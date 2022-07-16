@@ -2,17 +2,20 @@
 
 {% block content %}
 
-    <div class="content-section">
-        <div class="col">
-            <div class="media">
-                <img class="rounded-circle account-img" height="100" width="100" src="{{url_for('static', filename='profile_pics/' + current_user.profile_pic)}}">
+<div class="container col-4">
+    <div class="card shadow">
+        <div class="row">
+            <div class="col-auto">
+                <img class="rounded-circle account-img m-3" height="100" width="100" src="{{url_for('static', filename='profile_pics/' + current_user.profile_pic)}}">
+            </div>
+            <div class="col-auto my-auto me-3 ">
+                <h2 class="account-heading mr-3 pt-3">{{ current_user.name }}</h2>
+                <p class="text-secondary">{{ current_user.email }}</p>
             </div>
         </div>
-        <div class="media-body">
-            <h2 class="account-heading">{{ current_user.name }}</h2>
-            <p class="text-secondary">{{ current_user.email }}</p>
-        </div>
     </div>
+</div>
+
 
     <div class="row mx-auto mb-4">
         <div>
@@ -22,10 +25,12 @@
                     Update Account
                 </button>
                 
-                <!-- Button trigger modal -->
-                <button class="btn btn-secondary btn-sm m-1" href="{{url_for('set_password')}}">
-                    Change Password
-                </button>
+                <!-- Button link to Password reset -->
+                <a href="{{url_for('set_password')}}">
+                    <button class="btn btn-secondary btn-sm m-1">
+                        Change Password
+                    </button>
+                </a>
             </div>
         </div>
     </div>
