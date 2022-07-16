@@ -9,6 +9,7 @@ from webapp.forms import (
     UpdateAccountForm,
     UpdateProfileForm,
     AccountForm,
+    SetPasswordForm
 )
 from webapp.models import Account, User
 from flask_login import login_user, current_user, logout_user, login_required
@@ -52,7 +53,7 @@ def register():
             "success",
         )
         return redirect(url_for("login"))
-    return render_template("pages/register.html", title="Register", form=form)
+    return render_template("user/register.html", title="Register", form=form)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -68,7 +69,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for("dashboard"))
         else:
             flash("Login unsuccessful, please check email and password", "danger")
-    return render_template("pages/login.html", title="Login", form=form)
+    return render_template("user/login.html", title="Login", form=form)
 
 
 @app.route("/logout")
@@ -114,7 +115,7 @@ def profile():
         form.email.data = current_user.email
         form.dob.data = current_user.dob
 
-    return render_template("pages/profile.html", title="Profile", form=form)
+    return render_template("user/profile.html", title="Profile", form=form)
 
 
 @app.route("/accounts", methods=["GET", "POST"])
@@ -214,7 +215,7 @@ def expenses():
 @app.route("/settings")
 @login_required
 def settings():
-    return render_template("pages/settings.html", title="Settings")
+    return render_template("user/settings.html", title="Settings")
 
 
 @app.route("/site_info")
@@ -234,3 +235,24 @@ def fi():
 @login_required
 def documents():
     return render_template("pages/documents.html", title="Documents")
+
+
+
+#not yet completed
+
+@app.route("/set_password", methods=["GET", "POST"])
+def set_password():
+    form = SetPasswordForm()
+    if form.validate_on_submit():
+        if current_user:
+            current_user.password=bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+        else:
+            #presumably there is no 'current_user' if the user follows a forgotten password link
+            return
+        db.session.commit()
+        flash(
+            f"Password changed successfully",
+            "success",
+        )
+        return redirect(url_for("login"))
+    return render_template("user/set_password.html", form=form, title="Set Password")

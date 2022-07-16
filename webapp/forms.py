@@ -212,7 +212,7 @@ class ForgottenPasswordForm(FlaskForm):
 
 
 
-class ResetPasswordForm(FlaskForm):
+class SetPasswordForm(FlaskForm):
     password = PasswordField(
         "Password",
         validators=[

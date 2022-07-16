@@ -1,0 +1,112 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <div class="content-section">
+        <div class="col">
+            <div class="media">
+                <img class="rounded-circle account-img" height="100" width="100" src="{{url_for('static', filename='profile_pics/' + current_user.profile_pic)}}">
+            </div>
+        </div>
+        <div class="media-body">
+            <h2 class="account-heading">{{ current_user.name }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+    </div>
+
+    <div class="row mx-auto mb-4">
+        <div>
+            <div>
+                <!-- Button trigger updateAccountModal -->
+                <button type="button" class="btn btn-secondary btn-sm m-1" data-bs-toggle="modal" data-bs-target="#updateAccountModal">
+                    Update Account
+                </button>
+                
+                <!-- Button trigger modal -->
+                <button class="btn btn-secondary btn-sm m-1" href="{{url_for('set_password')}}">
+                    Change Password
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- updateAccountModal -->
+    <div class="modal fade" id="updateAccountModal" tabindex="-1" aria-labelledby="updateAccountModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateAccountModalLabel">Update Account</h5>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset class = "form-group">
+                            <legend class="border-bottom mb-4">
+                                Account Information
+                            </legend>
+                            <div class = "form-group">
+                                {{ form.name.label(class="form-control-label")}}
+                                {% if form.name.errors %}
+                                    {{ form.name(class="form-control form-control-lg is-invalid")}}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.name.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.name(class="form-control form-control-lg")}}
+                                {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                {{ form.email.label(class="form-control-label")}}
+                                {% if form.email.errors %}
+                                    {{ form.email(class="form-control form-control-lg is-invalid")}}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.email(class="form-control form-control-lg")}}
+                                {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                {{ form.dob.label(class="form-control-label")}}
+                                {% if form.dob.errors %}
+                                    {{ form.dob(class="form-control form-control-lg is-invalid")}}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.dob.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.dob(class="form-control form-control-lg")}}
+                                {% endif %}
+                            </div>
+                            <div class = "form-group">
+                                {{ form.picture.label() }}
+                                {{ form.picture(class='form-control-file') }}
+                                {% if form.picture.errors %}
+                                    {% for error in form.picture.errors %}
+                                        <span class="text-danger">{{ error }}</span><br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </fieldset>
+                        <div class = "form-group">
+                            {{ form.submit(class="btn btn-outline-info w-100 mt-3") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %} 
