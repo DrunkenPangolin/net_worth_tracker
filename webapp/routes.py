@@ -140,19 +140,17 @@ def accounts():
             f"Account added",
             "success",
         )
-    account_list = Account.query.filter_by(account_owner=current_user)
+    account_list = Account.query.filter_by(account_owner=current_user).order_by(Account.date_opened.asc())
     return render_template(
         "pages/accounts.html", title="Accounts", form=form, account_list=account_list
     )
 
 
-@app.route("/accounts/<int:account_id>", methods=["GET", "POST"])
+@app.route("/account_info/<int:account_id>", methods=["GET", "POST"])
 @login_required
 def account_info(account_id):
     form = UpdateAccountForm()
     account = Account.query.get_or_404(account_id)
-    print(account.date_opened)
-
     if account.account_owner != current_user:
         abort(404)
     elif request.method == "GET":
@@ -189,7 +187,7 @@ def account_info(account_id):
     )
 
 
-@app.route("/accounts/<int:account_id>/delete", methods=["GET", "POST"])
+@app.route("/account_info/<int:account_id>/delete", methods=["GET", "POST"])
 @login_required
 def delete_account(account_id):
     account = Account.query.get_or_404(account_id)

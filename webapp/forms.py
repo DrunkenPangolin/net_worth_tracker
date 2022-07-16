@@ -1,4 +1,3 @@
-from random import choices
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileField
 from flask_login import current_user
@@ -188,7 +187,45 @@ class UpdateAccountForm(FlaskForm):
 
     def validate_account_name(self, account_name):
         account = Account.query.filter_by(
-            account_name=account_name.data, user_id=current_user.id
+            account_name=account_name.data, user_id=current_user.id 
         ).first()
         if account:
+            print ('account id =',account.id)
             raise ValidationError("That account name is already registered")
+
+
+class ForgottenPasswordForm(FlaskForm):
+    email = StringField(
+        "Email",
+        validators=[
+            InputRequired(),
+            Email(),
+            Length(max=100),
+        ],
+    )
+    submit = SubmitField("Request Password Reset")
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if not user:
+            raise ValidationError("There is no account linked to that email")
+
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField(
+        "Password",
+        validators=[
+            InputRequired(),
+            ],
+        )
+    confirm_password = PasswordField(
+        "Confirm Password",
+        validators=[
+            InputRequired(),
+            EqualTo("password"),
+            ],
+        )
+    submit = SubmitField("Submit")
+
+    

@@ -3,54 +3,69 @@
 {% block content %}
 
 <h6>Would like a toggle for showing closed accounts ---------------></h6>
-
-
-
-
-
-    <!-- Example Table (Maybe to use for accounts page)-->
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Account</th>
-                            <th>Type</th>
-                            <th>Date Opened</th>
-                            <th>Credit Limit</th>
-                            <th>Benefit</th>
-                            <th>Benefit Expiry</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {% for account in account_list %}
-
-                        <tr>
-                            <td><a href="{{ url_for('account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
-                            <td>{{account.account_type}}</td>
-                            <td>{{account.date_opened}}</td>
-                            <td>{{account.currency}} {{account.credit_limit}}</td>
-                            <td>{{account.benefit}}</td>
-                            <td>{{account.benefit_expiry}}</td>
-                            <td>{{account.notes}}</td>
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-                </table>
+    <div class="row mx-auto mb-4">
+        <div>
+            <div>
+                <!-- Button trigger addAccountModal -->
+                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#addAccountModal">
+                    Add Account
+                </button>
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-info btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Show closed accounts
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Button trigger addAccountModal -->
-    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#addAccountModal">
-        Add Account
-    </button>
 
+
+    
+
+    <!-- Example Table (Maybe to use for accounts page)-->
+    <div class="row mx-auto mb-4">
+        <div>
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Type</th>
+                                    <th>Date Opened</th>
+                                    <th>Date Closed</th>
+                                    <th>Credit Limit</th>
+                                    <th>Benefit</th>
+                                    <th>Benefit Expiry</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for account in account_list %}
+
+                                <tr>
+                                    <td><a href="{{ url_for('account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
+                                    <td>{{account.account_type}}</td>
+                                    <td>{{account.date_opened}}</td>
+                                    <td>{{account.date_closed}}</td>
+                                    <td>{{account.currency}} {{account.credit_limit}}</td>
+                                    <td>{{account.benefit}}</td>
+                                    <td>{{account.benefit_expiry}}</td>
+                                    <td>{{account.notes}}</td>
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
