@@ -1,35 +1,141 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="card shadow col-4 mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Milestones of Financial Independence</h6>
+<div class="row mx-auto">
+    <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Milestones of Financial Independence</h6>
+            </div>
+            <div class="card-body">
+
+                <li>
+
+                </li>
+            </div>
         </div>
-        <div class="card-body">
-            <h4 class="small font-weight-bold">Positive Net Worth <span class="float-right">(Complete)</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">24 Month Rolling Averages</h6>
             </div>
-            <h4 class="small font-weight-bold">First 100K Net Worth <span class="float-right">(Complete)</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 6%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Coast FI <span class="float-right">(Complete)</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar" role="progressbar" style="width: 37%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Half FI <span class="float-right">80%</span></h4>
-            <div class="progress mb-4">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-            <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="card-body">
+                <li>
+                    Earnings
+                </li>
+                <li>
+                    Savings
+                </li>
+                <li>
+                    Savings Rate
+                </li>
+                <li>
+                    Investment Growth
+                </li>
+                <li>
+                    Growth Rate
+                </li>
+                <li>
+                    NW Change
+                </li>
+                <li>
+                    FI Percentage Change
+                </li>
             </div>
         </div>
     </div>
 
+
+
+
+    <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Milestones of Financial Independence</h6>
+            </div>
+            <div class="card-body">
+
+                {% for (milestone, target, percentage, date) in [('First 100K', '£100,000.00' , 100, 'Achieved'), ('Coast FI', '£168,491.61',100,'Achieved'), ('Half FI','£616,666.67',54,'22/06/2026'), ('Lean FI','£468,375.77',73.3,'22/11/2028'),('Financial Independence','£1,324,287.33',22.79,'03/12/2041')] %}
+
+
+                <h4 class="small font-weight-bold">{{milestone}} ({{target}}) <span class="float-right">{{date}}</span></h4>
+                <div class="row mb-4 align-items-center">
+                    <div class="col">
+                        <div class="progress progress-sm">
+                            <!-- style percentage changes the loading bar -->
+                            <div
+                                class="progress-bar bg-info" role="progressbar"
+                                style="width: {{percentage}}%" aria-valuenow="{{percentage}}" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="h6 mb-0 mr-2 font-weight-bold text-gray-800">
+                            {{percentage}}%
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+<!-- Content row for information cards-->
+<div class="row mx-auto">
+
+    {% for (milestone, target, percentage, date) in [('First 100K', '£100,000.00' , 100, 'Achieved'), ('Coast FI', '£168,411.66',100,'Achieved'), ('Half FI','£410,666.67',54,'22/06/2026'), ('Lean FI','£168,375.77',73,'Achieved'),('Financial Independence','£821,333.33',22.79,'03/12/2031')] %}
+
+
+    <!-- Financial Independence Card -->
+    
+    {% if milestone == 'Financial Independence' %}
+        <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
+    {% else %}
+        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
+    {% endif %}
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                {{milestone}} ({{date}})
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                        {{percentage}}%
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <!-- style percentage changes the loading bar -->
+                                        <div
+                                            class="progress-bar bg-info" role="progressbar"
+                                            style="width: {{percentage}}%" aria-valuenow="percentage" aria-valuemin="0"
+                                            aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                {{target}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+
 
 {% endblock content %}

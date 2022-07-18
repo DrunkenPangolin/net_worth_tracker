@@ -4,7 +4,7 @@
         <!-- Navbar brand -->
         <a class="navbar-brand" href="{{url_for('dashboard')}}">Financial Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
 
@@ -17,17 +17,15 @@
                 <a class="nav-link" href="{{ url_for('expenses') }}">Expenses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('fi') }}">Financial Independence</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('accounts') }}">Accounts</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
-                  <li><a class="dropdown-item" href="#">Compound Interest Calculator</a></li>
-                  <li><a class="dropdown-item" href="{{ url_for('documents') }}">Documents </a></li>
-                  <li><a class="dropdown-item" href="#">Sinking Fund</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('fi') }}">Financial Independence</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('documents') }}">Important Documents</a></li>
+                    <li><a class="dropdown-item" href="#">Compound Interest Calculator</a></li>
+                    <li><a class="dropdown-item" href="#">Sinking Fund</a></li>
                 </ul>
             </li>
         </ul>
@@ -42,7 +40,6 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
                         <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
-                        <li><a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
                     </ul>
