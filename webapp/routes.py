@@ -2,7 +2,7 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
-from webapp import app, db, bcrypt
+from webapp import app, db, bcrypt, mail
 from webapp.forms import (
     RegistrationForm,
     LoginForm,
@@ -13,6 +13,7 @@ from webapp.forms import (
 )
 from webapp.models import Account, User
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 from webapp.test import first_100, coast_fi, half_fi, lean_fi, fi
 
 
@@ -237,6 +238,12 @@ def fi():
 def documents():
     return render_template("pages/documents.html", title="Documents")
 
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message("Password Reset Request", sender="no-reply@financialdashboard.com",recipients=[user.email])
+    msg.body = f'''To reset your password, please follow the link: {url_for('reset_token', token=token,_external=True)}'''
+    mail.send(msg)
 
 
 #not yet completed
