@@ -13,6 +13,8 @@ from webapp.forms import (
 )
 from webapp.models import Account, User
 from flask_login import login_user, current_user, logout_user, login_required
+from webapp.test import first_100, coast_fi, half_fi, lean_fi, fi
+
 
 
 @app.route("/layout")
@@ -220,8 +222,13 @@ def site_info():
 @app.route("/financial_independence")
 @login_required
 def fi():
-    return render_template(
-        "pages/financial_independence.html", title="Financial Independence"
+    return render_template("pages/financial_independence.html",
+        title="Financial Independence",
+        first_100 = first_100,
+        coast_fi = coast_fi,
+        half_fi = half_fi,
+        lean_fi = lean_fi,
+        fi = fi,
     )
 
 

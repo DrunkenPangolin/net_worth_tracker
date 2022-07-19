@@ -142,4 +142,45 @@
 <li>
     Number of months for rolling average (recommended 24)
 </li>
+
+
+<!-- Example Table (Maybe to use for accounts page)-->
+<div class="row mx-auto mb-4">
+    <div>
+        <div class="card shadow">
+            <div class="card-header">
+                <h6 class="m-0">Expense Categories (CURRENTLY HARDCODED)</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Necessary/Discretionary</th>
+                                <th>Item</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for (category, necessity, item) in [('Housing & Living','Necessity','Mortgage/Rent'),('Housing & Living','Necessity','Council Tax'),('Housing & Living','Necessity','Home Insurance'),('Housing & Living','Necessity','Home Maintenance'),('Housing & Living','Necessity','Home Furnishing'),('Housing & Living','Necessity','Home Electronics'),('Housing & Living','Necessity','Water'),('Housing & Living','Necessity','Electric'), ('Housing & Living','Necessity','Gas'), ('Housing & Living','Necessity','Internet'), ('Housing & Living','Necessity','Phone'), ('Housing & Living','Necessity','Banking/Investment Services'), ('Housing & Living','Necessity','Other Services'), ('Health & Consumables','Necessity','Dentist'), ('Health & Consumables','Necessity','Optician'), ('Health & Consumables','Necessity','Clothing'), ('Health & Consumables','Necessity','Food'), ('Health & Consumables','Necessity','Non-Food'), ('Transport','Necessity','Car Maintenance'), ('Transport','Necessity','Car Tax'), ('Transport','Necessity','Car Insurance'), ('Transport','Discretionary','Motorbike Maintenance'), ('Transport','Discretionary','Motorbike Tax'), ('Transport','Discretionary','Motorbike Insurance'), ('Transport','Necessity','Fuel'), ('Transport','Necessity','Parking'), ('Transport','Necessity','Rescue and Recovery'), ('Transport','Necessity','Public Transport'), ('Hobbies','Discretionary','Climbing'), ('Hobbies','Discretionary','Homebrew'), ('Hobbies','Discretionary','Scuba Diving'), ('Hobbies','Discretionary','Skiing/Snowboarding'), ('Hobbies','Discretionary','Soaping'), ('Education','Discretionary','Spanish Lessons'), ('Education','Discretionary','Programming'), ('Leisure & Discretionary','Discretionary','Alcohol (Shop bought)'), ('Leisure & Discretionary','Discretionary','Drinking Out/Socialising'), ('Leisure & Discretionary','Discretionary','Tickets/Passes/Tours'), ('Leisure & Discretionary','Discretionary','Gifts/Donations'), ('Leisure & Discretionary','Discretionary','Subscriptions'), ('Leisure & Discretionary','Discretionary','Restaurants/Takeaways/Treats'), ('Leisure & Discretionary','Discretionary','Materialistic Desire'), ('Leisure & Discretionary','Discretionary','Miscellaneous/Cash Withdrawal'), ('Travel','Discretionary','Accommodation'), ('Travel','Discretionary','Flights'), ('Travel','Discretionary','General'), ('Travel','Discretionary','Insurance'), ('Work','Necessity','Certificates, Courses, etc'), ('Income','Money','Salary'), ('Income','Money','Miscellaneous'), ('Transfer','Money','Transfer')]  %}
+
+                                <tr>
+                                    <td>{{category}}</td>
+                                    <td>{{necessity}}</td>
+                                    <td>{{item}}</td>
+                                </tr>
+                                
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 {% endblock content %} 
