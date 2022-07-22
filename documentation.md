@@ -24,13 +24,13 @@
 
 
 
-## Bugs:
+## Bugs
 ### CSS/HTML
-- All CSS to do with forms
-- No x to dismiss flash messages
+- all CSS to do with forms
+- no x to dismiss flash messages
 - fix margins on FI tab for table
 - fix margins on Accounts tab
-- Would like a toggle for showing closed accounts
+- would like a toggle for showing closed accounts (separate page may be easier)
 -
 
 ### Flask
