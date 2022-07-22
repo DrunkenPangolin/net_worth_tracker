@@ -22,6 +22,13 @@
 - set up back end function for expenses functionality
 - 
 
+### Additional functions
+- set up on onlnine server with access from anywhere
+- email function for
+  - forgotten password
+  - expiring documentation
+  - expiring benefits on account
+- 
 
 
 ## Bugs
