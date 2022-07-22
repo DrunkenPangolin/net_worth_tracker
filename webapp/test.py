@@ -5,4 +5,4 @@ half_fi = ('Half FI','£410,666.67',54,'22/06/2026')
 lean_fi = ('Lean FI','£168,375.77',73,'Achieved')
 fi = ('Financial Independence','£821,333.33',22.79,'03/12/2031')
 
-# how to import values into flask html?
+# how to pass values into flask html?
