@@ -15,14 +15,19 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 login_manager.login_message_category = "info"
 
+from webapp import routes
+
 app.config['MAIL_SERVER'] = 
 app.config['MAIL_PORT'] = 
 app.config['MAIL_USE_TLS'] = 
 app.config['MAIL_USERNAME'] = 
 app.config['MAIL_PASSWORD'] = 
-
 mail = Mail(app)
 
+from webapp.users.routes import users
+from webapp.accounts.routes import accounts
+from webapp.main.routes import main
 
-
-from webapp import routes
+app.register_blueprint(users)
+app.register_blueprint(accounts)
+app.register_blueprint(main)

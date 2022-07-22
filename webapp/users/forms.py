@@ -7,12 +7,9 @@ from wtforms import (
     SubmitField,
     BooleanField,
     DateField,
-    IntegerField,
-    SelectField,
 )
 from wtforms.validators import InputRequired, Length, Email, EqualTo, ValidationError
 from webapp.models import Account, User
-from webapp.form_lists import account_types, currencies
 
 
 class RegistrationForm(FlaskForm):
@@ -100,100 +97,6 @@ class UpdateProfileForm(FlaskForm):
                 raise ValidationError("That email is already registered")
 
 
-class AccountForm(FlaskForm):
-    account_name = StringField(
-        "Account Name",
-        validators=[
-            InputRequired(),
-        ],
-    )
-    account_type = SelectField(
-        "Account Type",
-        choices=account_types,
-        validators=[
-            InputRequired(),
-        ],
-    )
-    currency = SelectField(
-        "Currency Code",
-        choices=currencies,
-        validators=[
-            InputRequired(),
-        ],
-    )
-    date_opened = DateField(
-        "Date Opened",
-        validators=[
-            InputRequired(),
-        ],
-    )
-    credit_limit = IntegerField("Credit Limit")
-    benefit = StringField(
-        "Account Benefit",
-    )
-    benefit_expiry = DateField("Benefit Expiry")
-    pin = StringField("PIN")
-    notes = StringField(
-        "Notes",
-    )
-    submit = SubmitField("Add Account")
-
-    def validate_account_name(self, account_name):
-        account = Account.query.filter_by(
-            account_name=account_name.data, user_id=current_user.id
-        ).first()
-        if account:
-            raise ValidationError("That account name is already registered")
-
-
-class UpdateAccountForm(FlaskForm):
-    account_name = StringField(
-        "Account Name",
-        validators=[
-            InputRequired(),
-        ],
-    )
-    account_type = SelectField(
-        "Account Type",
-        choices=account_types,
-        validators=[
-            InputRequired(),
-        ],
-    )
-    currency = SelectField(
-        "Currency Code",
-        choices=currencies,
-        validators=[
-            InputRequired(),
-        ],
-    )
-    date_opened = DateField(
-        "Date Opened",
-        validators=[
-            InputRequired(),
-        ],
-    )
-    date_closed = DateField("Date Closed")
-    credit_limit = IntegerField("Credit Limit")
-    benefit = StringField(
-        "Account Benefit",
-    )
-    benefit_expiry = DateField("Benefit Expiry")
-    pin = StringField("PIN")
-    notes = StringField(
-        "Notes",
-    )
-    submit = SubmitField("Update")
-
-    def validate_account_name(self, account_name):
-        account = Account.query.filter_by(
-            account_name=account_name.data, user_id=current_user.id 
-        ).first()
-        if account:
-            print ('account id =',account.id)
-            raise ValidationError("That account name is already registered")
-
-
 class ForgottenPasswordForm(FlaskForm):
     email = StringField(
         "Email",
@@ -211,7 +114,6 @@ class ForgottenPasswordForm(FlaskForm):
             raise ValidationError("There is no account linked to that email")
 
 
-
 class SetPasswordForm(FlaskForm):
     password = PasswordField(
         "Password",
@@ -227,5 +129,3 @@ class SetPasswordForm(FlaskForm):
             ],
         )
     submit = SubmitField("Submit")
-
-    
