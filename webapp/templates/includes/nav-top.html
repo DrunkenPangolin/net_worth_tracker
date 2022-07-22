@@ -2,7 +2,7 @@
     <div class="container-fluid">
         
         <!-- Navbar brand -->
-        <a class="navbar-brand" href="{{url_for('dashboard')}}">Financial Dashboard</a>
+        <a class="navbar-brand" href="{{url_for('main.dashboard')}}">Financial Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,19 +11,19 @@
         <!-- Nav links -->
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('portfolio') }}">Portfolio</a>
+                <a class="nav-link" href="{{ url_for('main.portfolio') }}">Portfolio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('expenses') }}">Expenses</a>
+                <a class="nav-link" href="{{ url_for('main.expenses') }}">Expenses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('accounts') }}">Accounts</a>
+                <a class="nav-link" href="{{ url_for('accounts.accounts_page') }}">Accounts</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
-                    <li><a class="dropdown-item" href="{{ url_for('fi') }}">Financial Independence</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('documents') }}">Important Documents</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.fi') }}">Financial Independence</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.documents') }}">Important Documents</a></li>
                     <li><a class="dropdown-item" href="#">Compound Interest Calculator</a></li>
                     <li><a class="dropdown-item" href="#">Sinking Fund</a></li>
                 </ul>
@@ -39,14 +39,14 @@
                         <img src="{{url_for('static', filename='profile_pics/' + current_user.profile_pic)}}" alt="{{ current_user.name }}" width="32" height="32" class="rounded-circle mx-1">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
-                        <li><a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('users.profile') }}">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('users.logout') }}">Logout</a></li>
                     </ul>
                 </div>
             {% else %}
-                <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-                <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Register</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Login</a>
             {% endif %}
         </div>
     </div>

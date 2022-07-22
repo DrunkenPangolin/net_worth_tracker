@@ -1,14 +1,11 @@
-import os
-import secrets
-from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
-from webapp import app, db, bcrypt, mail
+from webapp import db
 from webapp.accounts.forms import (
     UpdateAccountForm,
     AccountForm,
 )
 from webapp.models import Account, User
-from flask_login import login_user, current_user, logout_user, login_required
+from flask_login import current_user, login_required
 from flask_mail import Message
 
 
@@ -17,7 +14,7 @@ accounts = Blueprint("accounts", __name__)
 
 @accounts.route("/accounts", methods=["GET", "POST"])
 @login_required
-def accounts():
+def accounts_page():
     form = AccountForm()
     if form.validate_on_submit():
         account = Account(
@@ -94,4 +91,4 @@ def delete_account(account_id):
     else:
         db.session.delete(account)
         db.session.commit()
-        return redirect(url_for("accounts"))
+        return redirect(url_for("accounts.accounts_page"))

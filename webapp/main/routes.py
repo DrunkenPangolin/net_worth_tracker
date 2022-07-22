@@ -1,20 +1,8 @@
-from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
-from webapp import app, db, bcrypt, mail
-from webapp.forms import (
-    RegistrationForm,
-    LoginForm,
-    UpdateAccountForm,
-    UpdateProfileForm,
-    AccountForm,
-    SetPasswordForm
-)
-from webapp.models import Account, User
-from flask_login import login_user, current_user, logout_user, login_required
-from flask_mail import Message
+from flask import render_template, url_for, redirect, Blueprint
+from flask_login import login_required, current_user
 
 
 main = Blueprint("main", __name__)
-
 
 
 @main.route("/layout")
@@ -25,7 +13,7 @@ def layout():
 @main.route("/")
 def splash():
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("main.dashboard"))
     return render_template("pages/splash.html")
 
 

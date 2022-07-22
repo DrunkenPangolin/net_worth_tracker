@@ -12,17 +12,15 @@ db = SQLAlchemy(app)
 # db.create_all() #<-- wondering if this is necessary?
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-login_manager.login_view = "login"
+login_manager.login_view = "users.login"
 login_manager.login_message_category = "info"
 
-from webapp import routes
-
-app.config['MAIL_SERVER'] = 
-app.config['MAIL_PORT'] = 
-app.config['MAIL_USE_TLS'] = 
-app.config['MAIL_USERNAME'] = 
-app.config['MAIL_PASSWORD'] = 
-mail = Mail(app)
+#app.config['MAIL_SERVER'] = 
+#app.config['MAIL_PORT'] = 
+#app.config['MAIL_USE_TLS'] = 
+#app.config['MAIL_USERNAME'] = 
+#app.config['MAIL_PASSWORD'] = 
+#mail = Mail(app)
 
 from webapp.users.routes import users
 from webapp.accounts.routes import accounts

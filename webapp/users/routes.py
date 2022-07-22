@@ -1,12 +1,13 @@
+import os
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
-from webapp import db, bcrypt
+from webapp import app, db, bcrypt
 from webapp.models import User, Account
 from webapp.users.forms import (
     RegistrationForm,
     LoginForm,
     UpdateProfileForm,
-    SetPasswordForm
+    SetPasswordForm,
 )
 from webapp.users.utils import save_picture, send_reset_email
 
@@ -17,7 +18,7 @@ users = Blueprint("users", __name__)
 @users.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("main.dashboard"))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pass = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
@@ -33,21 +34,21 @@ def register():
             f"Profile created for {form.name.data}, you are now able to log in",
             "success",
         )
-        return redirect(url_for("login"))
+        return redirect(url_for("users.login"))
     return render_template("user/register.html", title="Register", form=form)
 
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("main.dashboard"))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get("next")
-            return redirect(next_page) if next_page else redirect(url_for("dashboard"))
+            return redirect(next_page) if next_page else redirect(url_for("main.dashboard"))
         else:
             flash("Login unsuccessful, please check email and password", "danger")
     return render_template("user/login.html", title="Login", form=form)
@@ -56,7 +57,7 @@ def login():
 @users.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("dashboard"))
+    return redirect(url_for("main.dashboard"))
 
 
 @users.route("/profile", methods=["GET", "POST"])
@@ -76,7 +77,7 @@ def profile():
         current_user.dob = form.dob.data
         db.session.commit()
         flash("Your profile has been updated!", "success")
-        return redirect(url_for("profile"))
+        return redirect(url_for("users.profile"))
     elif request.method == "GET":
         form.name.data = current_user.name
         form.email.data = current_user.email
@@ -100,5 +101,5 @@ def set_password():
             f"Password changed successfully",
             "success",
         )
-        return redirect(url_for("login"))
+        return redirect(url_for("users.login"))
     return render_template("user/set_password.html", form=form, title="Set Password")

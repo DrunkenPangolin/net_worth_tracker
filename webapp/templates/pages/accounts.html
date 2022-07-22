@@ -47,7 +47,7 @@
                                 {% for account in account_list %}
 
                                 <tr>
-                                    <td><a href="{{ url_for('account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
+                                    <td><a href="{{ url_for('accounts.account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
                                     <td>{{account.account_type}}</td>
                                     <td>{{account.date_opened}}</td>
                                     <td>{{account.date_closed}}</td>
