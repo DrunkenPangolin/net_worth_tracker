@@ -37,7 +37,7 @@ def accounts_page():
         )
     account_list = Account.query.filter_by(account_owner=current_user).order_by(Account.date_opened.asc())
     return render_template(
-        "pages/accounts.html", title="Accounts", form=form, account_list=account_list
+        "main/accounts.html", title="Accounts", form=form, account_list=account_list
     )
     
     
@@ -75,7 +75,7 @@ def account_info(account_id):
         )
 
     return render_template(
-        "pages/account_info.html",
+        "main/account_info.html",
         account=account,
         form=form,
         title=account.account_name,

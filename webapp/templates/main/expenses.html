@@ -32,7 +32,7 @@
     <div>
         <div class="card shadow">
             <div class="card-header">
-                <h6 class="m-0">Expenses Breakdown (I'd liked this to be interactive, click to expand category, CURRENTLY HARDCODED)</h6>
+                <h6 class="m-0">Expenses Breakdown (I'd liked this to be interactive, click to expand category)</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -50,8 +50,7 @@
                         <tfoot>
 
                             <!-- example data -->
-                            {% for (outgoing,daily,weekly,monthly,yearly,percentage) in [("TOTAL", "£73.80", "£518.35", "£2246.17", "£26954.00", "100.00%")] %}
-
+                            {% for (outgoing,daily,weekly,monthly,yearly,percentage) in total %}
                             <tr>
                                 <th>{{outgoing}}</th>
                                 <th>{{daily}}</th>
@@ -60,15 +59,13 @@
                                 <th>{{yearly}}</th>
                                 <th>{{percentage}}</th>
                             </tr>
-
                             {% endfor %}
 
                         </tfoot>
                         <tbody>
 
 
-                        {% for (outgoing,daily,weekly,monthly,yearly,percentage) in [('Housing & Living','£8.63','£60.63','£262.75','£3153.00','11.70%'),('Health & Consumables','£11.95','£83.96','£363.83','£4366.00','16.20%'),('Transport','£0.64','£4.50','£19.50','£234.00','0.87%'),('Hobbies','£17.91','£125.83','£545.25','£6543.00','24.27%'),('Education','£1.80','£12.63','£54.75','£657.00','2.44%'),('Leisure & Discretionary','£9.37','£65.83','£285.25','£3423.00','12.70%'),('Travel','£20.96','£147.23','£638.00','£7656.00','28.40%'),('Work','£0.09','£0.65','£2.83','£34.00','0.13%'),('Income','£0.64','£4.50','£19.50','£234.00','0.87%'),('Transfer','£1.79','£12.58','£54.50','£654.00','2.43%')] %}
-
+                            {% for (outgoing,daily,weekly,monthly,yearly,percentage) in table %}
                             <tr>
                                 <td>{{outgoing}}</td>
                                 <td>{{daily}}</td>
@@ -77,9 +74,7 @@
                                 <td>{{yearly}}</td>
                                 <td>{{percentage}}</td>
                             </tr>
-
-                        {% endfor %}
-
+                            {% endfor %}
 
                         </tbody>
                     </table>

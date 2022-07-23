@@ -5,7 +5,7 @@
     <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
         <div class="card shadow">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Milestones of Financial Independence</h6>
+                <h6 class="m-0 font-weight-bold text-info">Milestones of Financial Independence</h6>
             </div>
             <div class="card-body">
 
@@ -18,7 +18,7 @@
     <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
         <div class="card shadow">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">24 Month Rolling Averages</h6>
+                <h6 class="m-0 font-weight-bold text-info">24 Month Rolling Averages</h6>
             </div>
             <div class="card-body">
                 <li>
@@ -52,11 +52,11 @@
     <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
         <div class="card shadow">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Milestones of Financial Independence</h6>
+                <h6 class="m-0 font-weight-bold text-info">Milestones of Financial Independence</h6>
             </div>
             <div class="card-body">
 
-                {% for (milestone, target, percentage, date) in [('First 100K', '£100,000.00' , 100, 'Achieved'), ('Coast FI', '£168,491.61',100,'Achieved'), ('Half FI','£616,666.67',54,'22/06/2026'), ('Lean FI','£468,375.77',73.3,'22/11/2028'),('Financial Independence','£1,324,287.33',22.79,'03/12/2041')] %}
+                {% for (milestone, target, percentage, date) in milestones %}
 
 
                 <h4 class="small font-weight-bold">{{milestone}} ({{target}}) <span class="float-right">{{date}}</span></h4>
@@ -85,57 +85,6 @@
     </div>
 </div>
 
-
-
-
-<!-- Content row for information cards-->
-<div class="row mx-auto">
-
-    {% for (milestone, target, percentage, date) in [('First 100K', '£100,000.00' , 100, 'Achieved'), ('Coast FI', '£168,411.66',100,'Achieved'), ('Half FI','£410,666.67',54,'22/06/2026'), ('Lean FI','£168,375.77',73,'Achieved'), ('Financial Independence','£821,333.33',22.79,'03/12/2031')] %}
-
-
-    <!-- Financial Independence Card -->
-    
-    {% if milestone == 'Financial Independence' %}
-        <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
-    {% else %}
-        <div class="col-xl-2 col-md-4 col-sm-6 mb-4">
-    {% endif %}
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                {{milestone}} ({{date}})
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                        {{percentage}}%
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <!-- style percentage changes the loading bar -->
-                                        <div
-                                            class="progress-bar bg-info" role="progressbar"
-                                            style="width: {{percentage}}%" aria-valuenow="percentage" aria-valuemin="0"
-                                            aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                {{target}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    {% endfor %}
-
-</div>
 
 
 {% endblock content %}

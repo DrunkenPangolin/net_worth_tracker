@@ -14,18 +14,18 @@
                 <a class="nav-link" href="{{ url_for('main.portfolio') }}">Portfolio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('main.expenses') }}">Expenses</a>
+                <a class="nav-link" href="{{ url_for('main.expenses_page') }}">Expenses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('accounts.accounts_page') }}">Accounts</a>
+                <a class="nav-link" href="{{ url_for('main.fi_page') }}">FI</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown03">
-                    <li><a class="dropdown-item" href="{{ url_for('main.fi') }}">Financial Independence</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('main.documents') }}">Important Documents</a></li>
-                    <li><a class="dropdown-item" href="#">Compound Interest Calculator</a></li>
-                    <li><a class="dropdown-item" href="#">Sinking Fund</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('accounts.accounts_page') }}">Accounts Information</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('main.documents_page') }}">Important Documents</a></li>
+                    <li><a class="dropdown-item" href="####################################">Compound Interest Calculator</a></li>
+                    <li><a class="dropdown-item" href="####################################">Sinking Funds</a></li>
                 </ul>
             </li>
         </ul>
