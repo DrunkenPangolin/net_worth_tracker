@@ -85,7 +85,6 @@ class UpdateAccountForm(FlaskForm):
             InputRequired(),
         ],
     )
-    date_closed = DateField("Date Closed")
     credit_limit = IntegerField("Credit Limit")
     benefit = StringField(
         "Account Benefit",
@@ -104,3 +103,8 @@ class UpdateAccountForm(FlaskForm):
         if account:
             print ('account id =',account.id)
             raise ValidationError("That account name is already registered")
+
+
+class CloseAccountForm(FlaskForm):
+    date_closed = DateField("Date Closed")
+    submit = SubmitField("Close Account")
