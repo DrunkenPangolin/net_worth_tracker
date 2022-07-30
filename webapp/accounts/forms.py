@@ -12,7 +12,6 @@ from wtforms import (
 from wtforms.validators import InputRequired, ValidationError
 from webapp.models import Account, User
 from webapp.form_lists import account_types, currencies
-from werkzeug.utils import secure_filename
 
 
 
@@ -110,10 +109,10 @@ class UpdateAccountForm(FlaskForm):
 
 
 class CloseAccountForm(FlaskForm):
-    date_closed = DateField("Date Closed")
+    date_closed = DateField("Date Closed", validators=[InputRequired()])
     submit = SubmitField("Close Account")
 
 
 class CSVUploadForm(FlaskForm):
-    file = FileField("Upload CSV", validators=[FileAllowed(["csv"])])
+    file = FileField("Upload CSV", validators=[FileRequired(), FileAllowed(["csv"])])
     submit = SubmitField("Upload CSV")

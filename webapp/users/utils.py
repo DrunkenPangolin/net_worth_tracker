@@ -1,8 +1,10 @@
+from lib2to3.pgen2.grammar import opmap
 import os
 import secrets
 from PIL import Image
 from flask import url_for, current_app
 from flask_mail import Message
+from webapp import app
 # from webapp import mail
 
 
@@ -11,7 +13,7 @@ def save_picture(form_picture, user_id):
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = user_id + "-" + random_hex + f_ext
     print(picture_fn)
-    picture_path = os.path.join(app.root_path, "static/profile_pics", picture_fn)
+    picture_path = os.path.join(app.root_path, "static", "profile_pics", picture_fn)
     output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)

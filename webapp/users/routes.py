@@ -70,7 +70,7 @@ def profile():
             picture_file = save_picture(form.picture.data, str(current_user.id))
             current_user.profile_pic = picture_file
             if old_pic != "default.jpg":
-                os.remove(os.path.join(app.root_path, "static/profile_pics", old_pic))
+                os.remove(os.path.join(app.root_path, "static", "profile_pics", old_pic))
 
         current_user.name = form.name.data
         current_user.email = form.email.data

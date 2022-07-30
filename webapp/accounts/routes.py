@@ -1,15 +1,12 @@
-from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
-from sqlalchemy import null
-from webapp import db
-from webapp.accounts.forms import (
-    CloseAccountForm,
-    UpdateAccountForm,
-    AccountForm,
-    CSVUploadForm,
-)
-from webapp.models import Account, User
+import os
+from flask import abort, Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from flask_mail import Message
+from webapp import app, db
+from webapp.accounts.forms import AccountForm, CloseAccountForm, CSVUploadForm, UpdateAccountForm
+from webapp.models import Account, User
+from werkzeug.utils import secure_filename
+
 
 
 accounts = Blueprint("accounts", __name__)
@@ -66,6 +63,7 @@ def account_info(account_id):
         update_form.benefit.data = account.benefit
         update_form.benefit_expiry.data = account.benefit_expiry
         update_form.notes.data = account.notes
+
     elif update_form.validate_on_submit():
         account.account_name = update_form.account_name.data
         account.account_type = update_form.account_type.data
@@ -77,19 +75,19 @@ def account_info(account_id):
         account.pin = update_form.pin.data
         account.notes = update_form.notes.data
         db.session.commit()
-        flash(
-            f"Account updated",
-            "success",
-        )
+        flash(f"Account updated", "success")
     
     elif close_form.validate_on_submit():
         account.date_closed = close_form.date_closed.data
         db.session.commit()
+        flash(f"Account closed", "danger")
 
-
-#    elif csv_form.validate_on_submit():
-
-
+    elif csv_form.validate_on_submit():
+        file = csv_form.file.data
+        file.save(os.path.join(
+            app.root_path,app.config["UPLOAD_FOLDER"],secure_filename(str(current_user.id)+"."+str(account_id)+"-"+file.filename)
+            ))
+        flash(f"File uploaded", "success")
 
 
     return render_template(
