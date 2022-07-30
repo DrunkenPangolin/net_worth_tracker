@@ -2,32 +2,33 @@
 
 {% block content %}
 
-    <div class="row mx-auto mb-4">
-        <div>
-            <div>
-                <button type="button" class="btn btn-secondary btn-sm m-1">
-                    Add CSV File
-                </button>
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#closeModal">
-                    {% if account.date_closed != None %}
-                    Change Close Details
-                    {% else %}
-                    Close Account
-                    {% endif %}
-                </button>
-
-                <!-- Button trigger updateAccountModal -->
-                <button type="button" class="btn btn-outline-secondary btn-sm m-1" data-bs-toggle="modal" data-bs-target="#updateAccountModal">
-                    Update Account Details
-                </button>
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    Delete Account
-                </button>
-            </div>
+    <div class="row mx-auto mb-3">
+        <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+            <!-- Button trigger csvModal -->
+            <button type="button" class="btn btn-secondary btn-sm w-100 mx-auto my-1" data-bs-toggle="modal" data-bs-target="#csvModal">
+                Add CSV File
+            </button>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+            <!-- Button trigger updateAccountModal -->
+            <button type="button" class="btn btn-outline-secondary btn-sm w-100 mx-auto my-1" data-bs-toggle="modal" data-bs-target="#updateAccountModal">
+                Update Account
+            </button>
+        </div><div class="col-12 col-sm-6 col-md-3 col-lg-2">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn-sm w-100 mx-auto my-1" data-bs-toggle="modal" data-bs-target="#closeModal">
+                {% if account.date_closed != None %}
+                Change Close Details
+                {% else %}
+                Close Account
+                {% endif %}
+            </button>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-danger btn-sm w-100 mx-auto my-1" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Delete Account
+            </button>
         </div>
     </div>
 
@@ -254,6 +255,7 @@
         </div>
     </div>
 
+
     <!-- Close Modal -->
     <div class="modal fade" id="closeModal" tabindex="-1" aria-labelledby="closeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -323,6 +325,40 @@
     </div>
 
 
+    <!-- Upload CSV Modal -->
+    <div class="modal fade" id="csvModal" tabindex="-1" aria-labelledby="csvModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="csvModalLabel">
+                        Upload CSV
+                    </h5>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="">
+                        {{ csv_form.hidden_tag() }}
+                        <div class = "form-group">
+                            {{ csv_form.file.label(class="form-control-label")}}
+                            {% if csv_form.file.errors %}
+                                {{ csv_form.file(class="form-control form-control-lg is-invalid")}}
+                                <div class="invalid-feedback">
+                                    {% for error in csv_form.file.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ csv_form.file(class="form-control form-control-lg")}}
+                            {% endif %}
+                        </div>
+                        <div class = "form-group">
+                            {{ csv_form.submit(class="btn btn-outline-info w-100 mt-3") }}
+                        </div>
+                    </form>        
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock content %}

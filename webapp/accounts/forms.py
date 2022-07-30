@@ -1,4 +1,6 @@
+from email.policy import default
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed, FileField, FileRequired
 from flask_login import current_user
 from wtforms import (
     StringField,
@@ -10,6 +12,8 @@ from wtforms import (
 from wtforms.validators import InputRequired, ValidationError
 from webapp.models import Account, User
 from webapp.form_lists import account_types, currencies
+from werkzeug.utils import secure_filename
+
 
 
 class AccountForm(FlaskForm):
@@ -39,7 +43,7 @@ class AccountForm(FlaskForm):
             InputRequired(),
         ],
     )
-    credit_limit = IntegerField("Credit Limit")
+    credit_limit = IntegerField("Credit Limit", default=0)
     benefit = StringField(
         "Account Benefit",
     )
@@ -108,3 +112,8 @@ class UpdateAccountForm(FlaskForm):
 class CloseAccountForm(FlaskForm):
     date_closed = DateField("Date Closed")
     submit = SubmitField("Close Account")
+
+
+class CSVUploadForm(FlaskForm):
+    file = FileField("Upload CSV", validators=[FileAllowed(["csv"])])
+    submit = SubmitField("Upload CSV")

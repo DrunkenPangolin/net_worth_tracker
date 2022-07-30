@@ -5,6 +5,7 @@ from webapp.accounts.forms import (
     CloseAccountForm,
     UpdateAccountForm,
     AccountForm,
+    CSVUploadForm,
 )
 from webapp.models import Account, User
 from flask_login import current_user, login_required
@@ -16,7 +17,7 @@ accounts = Blueprint("accounts", __name__)
 
 @accounts.route("/accounts", methods=["GET", "POST"])
 @login_required
-def accounts_page():
+def accounts_page(closed=False):
     form = AccountForm()
     if form.validate_on_submit():
         account = Account(
@@ -37,7 +38,12 @@ def accounts_page():
             f"Account added",
             "success",
         )
-    account_list = Account.query.filter_by(account_owner=current_user).order_by(Account.date_opened.asc())
+
+    if closed == False:
+        account_list = Account.query.filter_by(account_owner=current_user).filter_by(date_closed=None).order_by(Account.date_opened.asc())
+    else:
+        account_list = Account.query.filter_by(account_owner=current_user).order_by(Account.date_opened.asc()).order_by(Account.date_closed.asc())
+
     return render_template(
         "main/accounts.html", title="Accounts", form=form, account_list=account_list
     )
@@ -48,6 +54,7 @@ def accounts_page():
 def account_info(account_id):
     update_form = UpdateAccountForm()
     close_form = CloseAccountForm()
+    csv_form = CSVUploadForm()
     account = Account.query.get_or_404(account_id)
     if account.account_owner != current_user:
         abort(404)
@@ -80,12 +87,17 @@ def account_info(account_id):
         db.session.commit()
 
 
+#    elif csv_form.validate_on_submit():
+
+
+
 
     return render_template(
         "main/account_info.html",
         account=account,
         update_form=update_form,
         close_form=close_form,
+        csv_form=csv_form,
         title=account.account_name,
     )
 
