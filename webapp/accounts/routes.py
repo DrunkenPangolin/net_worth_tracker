@@ -8,7 +8,6 @@ from webapp.models import Account, User
 from werkzeug.utils import secure_filename
 
 
-
 accounts = Blueprint("accounts", __name__)
 
 

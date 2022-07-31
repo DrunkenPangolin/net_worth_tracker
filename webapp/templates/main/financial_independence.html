@@ -6,7 +6,9 @@
         <div class="card shadow">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-info">Milestones of Financial Independence</h6>
+
             </div>
+
             <div class="card-body">
 
                 <li>
@@ -18,9 +20,26 @@
     <div class="col-xl-4 col-md-8 col-sm-12 mb-4">
         <div class="card shadow">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-info">24 Month Rolling Averages</h6>
+                <div class="col">
+                    <h6 class="m-0 font-weight-bold text-info">24 Month Rolling Averages</h6>
+                </div>
             </div>
+            
             <div class="card-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link col" id="nav-day-tab" data-bs-toggle="tab" data-bs-target="#nav-day" type="button" role="tab" aria-controls="nav-day" aria-selected="true">Day</button>
+                    <button class="nav-link col" id="nav-week-tab" data-bs-toggle="tab" data-bs-target="#nav-week" type="button" role="tab" aria-controls="nav-week" aria-selected="false">Week</button>
+                    <button class="nav-link col" id="nav-month-tab" data-bs-toggle="tab" data-bs-target="#nav-month" type="button" role="tab" aria-controls="nav-month" aria-selected="false">Month</button>
+                    <button class="nav-link col active" id="nav-year-tab" data-bs-toggle="tab" data-bs-target="#nav-year" type="button" role="tab" aria-controls="nav-year" aria-selected="false">Year</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-day" role="tabpanel" aria-labelledby="nav-day-tab">Day</div>
+                    <div class="tab-pane fade" id="nav-week" role="tabpanel" aria-labelledby="nav-week-tab">Week</div>
+                    <div class="tab-pane fade" id="nav-month" role="tabpanel" aria-labelledby="nav-month-tab">Month</div>
+                    <div class="tab-pane fade show active" id="nav-year" role="tabpanel" aria-labelledby="nav-year-tab">Year</div>
+                </div>
                 <li>
                     Earnings
                 </li>
@@ -54,12 +73,18 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-info">Milestones of Financial Independence</h6>
             </div>
-            <div class="card-body">
+            <div class="card-body container">
 
                 {% for (milestone, target, percentage, date) in milestones %}
+                <div class="row">
+                <h4 class="small font-weight-bold w-100 col">
+                    {{date}} - {{milestone}}
+                </h4>
+                <h4 class="small font-weight-bold col-auto">
+                    ({{target}})
+                </h4>
+                </div>
 
-
-                <h4 class="small font-weight-bold">{{milestone}} ({{target}}) <span class="float-right">{{date}}</span></h4>
                 <div class="row mb-4 align-items-center">
                     <div class="col">
                         <div class="progress progress-sm">
