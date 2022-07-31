@@ -28,8 +28,9 @@ def dashboard():
 @main.route("/portfolio")
 @login_required
 def portfolio():
+    category_break
     cards = [card_net_worth, card_nest_egg, card_liabilities, card_open_credit, card_available_credit, card_cash_credit]
-    return render_template("main/portfolio.html", title="Portfolio", cards = cards)
+    return render_template("main/portfolio.html", title="Portfolio", category_break=category_break, cards=cards)
 
 
 @main.route("/expenses")

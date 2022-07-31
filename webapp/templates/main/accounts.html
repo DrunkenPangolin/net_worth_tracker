@@ -33,10 +33,10 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered table table-striped" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Account</th>
+                                    <th>Account (click for more)</th>
                                     <th>Type</th>
                                     <th>Date Opened</th>
                                     <th>Date Closed</th>
@@ -51,7 +51,7 @@
                                 {% for account in account_list %}
 
                                 <tr>
-                                    <td><a href="{{ url_for('accounts.account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
+                                    <th><a href="{{ url_for('accounts.account_info', account_id=account.id) }}">{{account.account_name}}</a></td>
                                     <td>{{account.account_type}}</td>
                                     <td>{{account.date_opened}}</td>
                                     <td>{{account.date_closed}}</td>

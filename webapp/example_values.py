@@ -1,3 +1,5 @@
+from re import I
+from webapp.form_lists import account_types
 
 
 # Basic Info
@@ -16,6 +18,8 @@ lean_fi = 30020
 
 # Calculated info
 fi_percentage = round((net_worth/fi_number)*100,1)
+
+
 
 # Cards
 card_net_worth = ('Net Worth',net_worth)
@@ -50,3 +54,13 @@ investment_growth = ("Investment Growth",10000)
 growth_rate = ("Growth Rate",10000)
 avg_nw = ("NW Change",10000)
 avg_fi_perc = ("FI % Increase",10000)
+
+
+# Portfolio Breakdown
+category_break = []
+i=0
+for category in account_types:
+    i += 1
+    breakdown = (category, i, round(i/i**2,1))
+    category_break.append(breakdown)
+

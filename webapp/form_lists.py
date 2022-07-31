@@ -135,7 +135,7 @@ currencies = [
     "SEK - Swedish krona (plural: kronor)",
     "SGD - Singapore dollar",
     "SHP - Saint Helena pound",
-    "SLL / SLE - Sierra Leonean leone",
+    "SLL - Sierra Leonean leone",
     "SOS - Somali shilling",
     "SRD - Surinamese dollar",
     "SSP - South Sudanese pound",
