@@ -21,7 +21,7 @@ def splash_page():
 @main.route("/dashboard")
 @login_required
 def dashboard():
-    cards = [card_net_worth, card_nest_egg, card_total_assets, card_liabilities, card_fi_number]
+    cards = [card_net_worth, card_nest_egg, card_fi_number, card_fi_date, card_fi_time]
     return render_template("main/dashboard.html", title="Dashboard", cards=cards, card_fi_percentage=card_fi_percentage)
 
 
@@ -48,8 +48,9 @@ def site_info():
 @main.route("/financial_independence")
 @login_required
 def fi_page():
+    averages = [avg_earnings, avg_savings, avg_savings_rate, investment_growth, growth_rate, avg_nw, avg_fi_perc]
     milestones = [milestone_first_100, milestone_coast_fi, milestone_half_fi, milestone_lean_fi, milestone_fi]
-    return render_template("main/financial_independence.html", title="Financial Independence", milestones = milestones)
+    return render_template("main/financial_independence.html", title="Financial Independence", averages=averages, milestones = milestones)
 
 
 @main.route("/documents")
